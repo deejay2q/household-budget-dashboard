@@ -122,6 +122,27 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .leg-total-lbl{color:var(--text3)}
 .leg-total-val{font-family:'DM Mono',monospace;color:var(--accent);font-weight:700;}
 
+/* ── Mobile detail cards ── */
+.mobile-cards{display:none;}
+.mcard{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 13px;margin-bottom:8px;}
+.mcard-top{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:6px;}
+.mcard-no{font-size:.65rem;font-family:'DM Mono',monospace;}
+.mcard-date{font-size:.68rem;color:var(--text3);}
+.mcard-c2{font-size:.72rem;}
+.mcard-result{margin-left:auto;font-size:.7rem;}
+.mcard-place{font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:7px;}
+.mcard-bottom{display:flex;align-items:center;gap:10px;}
+.mcard-card{font-size:.7rem;}
+.mcard-amt{font-family:'DM Mono',monospace;font-size:.88rem;color:var(--accent);font-weight:600;margin-left:auto;}
+.mcard-disc{font-size:.72rem;font-family:'DM Mono',monospace;}
+.hl-y-m{background:rgba(210,153,34,.06)!important;}
+.hl-r-m{background:rgba(248,81,73,.06)!important;}
+
+@media (max-width: 768px) {
+  .mobile-cards{display:block;}
+  .desktop-table{display:none;}
+}
+
 /* ── Notice ── */
 .notice{margin-top:10px;padding:9px 13px;background:var(--bg3);border-radius:8px;font-size:.72rem;color:var(--text3);line-height:1.8;}
 .notice strong{color:var(--text2);}
@@ -137,6 +158,92 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .dtbl tr:hover td{background:rgba(88,166,255,.04)}
 .hl-y td{background:rgba(210,153,34,.05)!important}
 .hl-r td{background:rgba(248,81,73,.05)!important}
+
+/* ══════════════════════════════════════════════
+   모바일 반응형 (≤ 768px)
+══════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Header */
+  .header{padding:14px 16px;flex-direction:column;align-items:flex-start;gap:8px;}
+  .header h1{font-size:1.2rem;}
+  .header .sub{font-size:.7rem;line-height:1.5;}
+  .date-badge{font-size:.72rem;padding:4px 10px;}
+
+  /* Container */
+  .container{padding:14px 12px;}
+
+  /* Grid → 1열 */
+  .top-row{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
+  .grid2{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
+  .grid3{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
+
+  /* Summary cards */
+  .scard{padding:16px 18px;}
+  .scard-val{font-size:1.6rem;}
+  .budget-remain-val{font-size:.95rem;}
+
+  /* Ladder - 모바일에서 가로 2열로 */
+  .benefit-ladder{padding:10px 0 4px 4px;}
+  .ladder-val{font-size:.95rem;}
+  .ladder-sub{font-size:.65rem;}
+
+  /* 카드별 실적: 4열 → 2열 */
+  .perf-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .perf-card{padding:14px 14px;}
+  .perf-name{font-size:.8rem;margin-bottom:10px;}
+  .perf-row{font-size:.74rem;margin-bottom:5px;}
+  .perf-pct{font-size:.85rem;}
+  .perf-bar-bg{height:7px;margin:10px 0 5px;}
+  .perf-bar-fill{height:7px;}
+
+  /* 실적 panel 패딩 */
+  .panel{border-radius:10px;}
+  .panel-hd{padding:12px 14px 0;}
+  .sec-title{font-size:.7rem;margin-bottom:10px;}
+
+  /* Combo chart */
+  .combo-wrap{padding:12px 12px 0;margin-bottom:16px;border-radius:10px;}
+  .combo-meta{gap:14px;padding:8px 0 12px;flex-wrap:wrap;}
+  .combo-meta-item{font-size:.7rem;}
+
+  /* 일별 차트 - 모바일에서 높이 조정 */
+  #dailyComboChart{height:100px !important;}
+
+  /* Tables */
+  .tbl{font-size:.74rem;}
+  .tbl th{padding:7px 8px;font-size:.62rem;}
+  .tbl td{padding:7px 8px;}
+
+  /* Donut charts - 세로 배치 */
+  .chart-wrap{padding:14px 14px;border-radius:10px;}
+  .donut-inner{flex-direction:column;align-items:center;gap:14px;}
+  .donut-inner canvas{width:160px !important;height:160px !important;}
+  .legend-box{width:100%;}
+  .leg-item{padding:6px 0;}
+  .leg-left{font-size:.78rem;}
+  .leg-val{font-size:.78rem;}
+
+  /* 상세 내역 테이블 - 스크롤 */
+  .dtbl-wrap{padding:14px 12px;margin-bottom:16px;border-radius:10px;}
+  .dtbl{font-size:.72rem;}
+  .dtbl th{padding:7px 7px;font-size:.62rem;}
+  .dtbl td{padding:6px 7px;}
+
+  /* 혜택 상세 테이블 컬럼 조정 */
+  .tbl th:nth-child(2),.tbl td:nth-child(2){max-width:80px;overflow:hidden;text-overflow:ellipsis;}
+}
+
+/* 아주 작은 화면 (≤ 400px) */
+@media (max-width: 400px) {
+  .perf-grid{grid-template-columns:1fr 1fr;}
+  .perf-card{padding:12px 10px;}
+  .perf-row{font-size:.68rem;}
+  .scard-val{font-size:1.4rem;}
+  .header h1{font-size:1.1rem;}
+  .tbl th{padding:6px 6px;font-size:.58rem;}
+  .tbl td{padding:6px 6px;font-size:.7rem;}
+}
 </style>
 </head>
 <body>
@@ -301,14 +408,14 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     <div class="chart-wrap">
       <div class="sec-title">항목별 지출 비중 (C1-C2)</div>
       <div class="donut-inner">
-        <canvas id="catChart" width="185" height="185"></canvas>
+        <canvas id="catChart" width="185" height="185" style="max-width:185px;max-height:185px;"></canvas>
         <div class="legend-box" id="catLegend"></div>
       </div>
     </div>
     <div class="chart-wrap">
       <div class="sec-title">카드사별 지출 비중</div>
       <div class="donut-inner">
-        <canvas id="cardPieChart" width="185" height="185"></canvas>
+        <canvas id="cardPieChart" width="185" height="185" style="max-width:185px;max-height:185px;"></canvas>
         <div class="legend-box" id="cardLegend"></div>
       </div>
     </div>
@@ -329,7 +436,68 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <!-- ⑧ 상세 내역 -->
   <div class="dtbl-wrap">
     <div class="sec-title">상세 사용 내역 — 2026년 3월 1주차 <span style="font-size:.7rem;color:var(--red);font-weight:400;text-transform:none;letter-spacing:0;">&nbsp;('기본' 항목 No.1~4 제외)</span></div>
-    <div style="overflow-x:auto;">
+
+    <!-- 모바일 카드뷰 -->
+    <div class="mobile-cards">
+      <div class="mcard hl-y-m">
+        <div class="mcard-top"><span class="mcard-no t3">No.5</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-place">유카스에너지</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">87,397원</span><span class="cy num mcard-disc">할인 6,120</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.6</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">유카스에너지</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,999원</span><span class="cg num mcard-disc">적립 999</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.7</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-place">쿠팡 프레시</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">롯데카드</span><span class="mcard-amt num">14,680원</span><span class="cy num mcard-disc">할인 1,468</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.8</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">폴바셋 (신세계 시흥)</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">6,500원</span><span class="cg num mcard-disc">적립 500</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.9</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">폴바셋 (신세계 시흥)</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">26,300원</span><span class="t3 num mcard-disc">혜택없음</span></div>
+      </div>
+      <div class="mcard hl-y-m">
+        <div class="mcard-top"><span class="mcard-no t3">No.10</span><span class="mcard-date">03-02 월</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">연금보험료 3월분 6회 완납</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,997원</span><span class="cg num mcard-disc">적립 997</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.11</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">도미노피자</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">28,050원</span><span class="t3 num mcard-disc">혜택없음</span></div>
+      </div>
+      <div class="mcard hl-r-m">
+        <div class="mcard-top"><span class="mcard-no t3">No.12</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-place">이마트 중동점</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">75,690원</span><span class="cy num mcard-disc">할인 5,000</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.13</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">이마트 중동점 (삼겹살)</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한RPM</span><span class="mcard-amt num">12,420원</span><span class="cg num mcard-disc">적립 248</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.14</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">이마트 중동점</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">6,990원</span><span class="cg num mcard-disc">적립 990</span></div>
+      </div>
+      <div class="mcard hl-y-m">
+        <div class="mcard-top"><span class="mcard-no t3">No.15</span><span class="mcard-date">03-01 일</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">연금보험료 3월분 5회 완납</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,997원</span><span class="cg num mcard-disc">적립 997</span></div>
+      </div>
+    </div>
+
+    <!-- 데스크탑 테이블뷰 -->
+    <div class="desktop-table" style="overflow-x:auto;">
       <table class="dtbl">
         <thead>
           <tr>
@@ -353,7 +521,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <tr class="hl-y"><td class="c t3 num">15</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
         </tbody>
       </table>
-    </div>
+    </div><!-- /desktop-table -->
   </div>
 
 </div><!-- /container -->
