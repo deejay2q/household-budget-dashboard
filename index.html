@@ -99,6 +99,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 /* ── Combo chart wrapper ── */
 .combo-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:17px 19px 0;margin-bottom:22px;}
+.combo-scroll-outer{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;}
+/* 스크롤바 스타일 (모바일에서도 얇게) */
+.combo-scroll-outer::-webkit-scrollbar{height:4px;}
+.combo-scroll-outer::-webkit-scrollbar-track{background:var(--bg3);border-radius:99px;}
+.combo-scroll-outer::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
 /* extra bottom space so the rotated labels below x-axis are visible inside the panel */
 .combo-inner{padding-bottom:0;}
 .combo-meta{display:flex;gap:20px;padding:10px 0 16px;}
@@ -207,8 +212,15 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   .combo-meta{gap:14px;padding:8px 0 12px;flex-wrap:wrap;}
   .combo-meta-item{font-size:.7rem;}
 
-  /* 일별 차트 - 모바일에서 높이 조정 */
-  #dailyComboChart{height:100px !important;}
+  /* 일별 차트 스크롤 힌트 */
+  .combo-scroll-outer::after{
+    content:'← 스크롤하여 전체 확인';
+    display:block;
+    font-size:.65rem;
+    color:var(--text3);
+    text-align:right;
+    padding:4px 2px 0;
+  }
 
   /* Tables */
   .tbl{font-size:.74rem;}
@@ -315,8 +327,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <!-- ③ 일별 지출 현황 복합 차트 -->
   <div class="combo-wrap">
     <div class="panel-hd"><div class="sec-title">일별 지출 현황 (막대: 당일 사용액 / 선: 누적 사용액)</div></div>
-    <div class="combo-inner">
-      <canvas id="dailyComboChart" height="130"></canvas>
+    <!-- 모바일: 가로 스크롤 컨테이너 -->
+    <div class="combo-scroll-outer">
+      <div class="combo-inner">
+        <canvas id="dailyComboChart" height="130"></canvas>
+      </div>
     </div>
     <div class="combo-meta">
       <div class="combo-meta-item"><div class="combo-meta-dot" style="background:rgba(88,166,255,.7);"></div><span>당일 사용액 (막대)</span></div>
@@ -538,12 +553,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     return `03/${String(d).padStart(2,'0')}(${DOW[new Date(2026,2,d).getDay()]})`;
   });
 
-  // 당일 사용액
   const rawDaily = new Array(DAYS).fill(null);
-  rawDaily[0] = 101097;   // 03/01
-  rawDaily[1] = 174923;   // 03/02
+  rawDaily[0] = 101097;
+  rawDaily[1] = 174923;
 
-  // 누적 사용액
   const cumAmt = new Array(DAYS).fill(null);
   let run = 0;
   for (let i = 0; i < DAYS; i++) {
@@ -552,8 +565,86 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   }
 
   const yMax = 400000;
+  const isMobile = window.innerWidth <= 768;
 
-  const dailyChart = new Chart(document.getElementById('dailyComboChart'), {
+  const canvas = document.getElementById('dailyComboChart');
+
+  // ── 모바일: canvas를 고정 너비로 키워서 가로 스크롤 ──
+  if (isMobile) {
+    const mobileW = Math.max(31 * 28 + 80, 960);
+    canvas.style.width  = mobileW + 'px';
+    canvas.style.height = '260px';
+    canvas.width  = mobileW * window.devicePixelRatio;
+    canvas.height = 260 * window.devicePixelRatio;
+  }
+  // ── 데스크탑: height 속성(=130)을 유지하고 responsive:true로 원래대로 ──
+
+  const chartOptions = isMobile ? {
+    // 모바일 전용 옵션
+    responsive: false,
+    maintainAspectRatio: false,
+    layout:{ padding:{ top:38, right:20, bottom:60, left:4 } },
+    interaction:{ mode:'index', intersect:false },
+    scales: {
+      y:{
+        min:0, max:yMax,
+        grid:{ color:'rgba(38,48,71,.65)' },
+        ticks:{ color:'#8b949e', maxTicksLimit:7, callback:v => v===0?'0':(v/10000)+'만' }
+      },
+      x:{
+        grid:{ color:'rgba(38,48,71,.3)' },
+        ticks:{
+          color: ctx => ctx.index<=1 ? '#8b949e' : '#2e3847',
+          maxRotation:45, minRotation:45, font:{ size:9 },
+          callback: function(val){ return this.getLabelForValue(val); }
+        }
+      }
+    },
+    plugins:{
+      legend:{ display:false },
+      tooltip:{
+        backgroundColor:'#1c2333', borderColor:'#263047', borderWidth:1,
+        padding:12, titleColor:'#e6edf3', bodyColor:'#8b949e',
+        callbacks:{
+          label: ctx => ctx.raw===null ? null : ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
+          filter: item => item.raw !== null
+        }
+      }
+    }
+  } : {
+    // 데스크탑 — 기존 그대로
+    responsive:true,
+    layout:{ padding:{ top:38, right:20, bottom:80, left:4 } },
+    interaction:{ mode:'index', intersect:false },
+    scales: {
+      y:{
+        min:0, max:yMax,
+        grid:{ color:'rgba(38,48,71,.65)' },
+        ticks:{ color:'#8b949e', maxTicksLimit:7, callback:v => v===0?'0':(v/10000)+'만' }
+      },
+      x:{
+        grid:{ color:'rgba(38,48,71,.3)' },
+        ticks:{
+          color: ctx => ctx.index<=1 ? '#8b949e' : '#2e3847',
+          maxRotation:45, minRotation:45, font:{ size:10 },
+          callback: function(val){ return this.getLabelForValue(val); }
+        }
+      }
+    },
+    plugins:{
+      legend:{ display:false },
+      tooltip:{
+        backgroundColor:'#1c2333', borderColor:'#263047', borderWidth:1,
+        padding:12, titleColor:'#e6edf3', bodyColor:'#8b949e',
+        callbacks:{
+          label: ctx => ctx.raw===null ? null : ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
+          filter: item => item.raw !== null
+        }
+      }
+    }
+  };
+
+  const dailyChart = new Chart(canvas, {
     data: {
       labels,
       datasets: [
@@ -571,41 +662,9 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         }
       ]
     },
-    options: {
-      responsive:true,
-      // top padding for cumulative labels, bottom padding for daily-amount labels below x-axis
-      layout:{ padding:{ top:38, right:20, bottom:80, left:4 } },
-      interaction:{ mode:'index', intersect:false },
-      scales: {
-        y:{
-          min:0, max:yMax,
-          grid:{ color:'rgba(38,48,71,.65)' },
-          ticks:{ color:'#8b949e', maxTicksLimit:7, callback:v => v===0?'0':(v/10000)+'만' }
-        },
-        x:{
-          grid:{ color:'rgba(38,48,71,.3)' },
-          ticks:{
-            color: ctx => ctx.index<=1 ? '#8b949e' : '#2e3847',
-            maxRotation:45, minRotation:45, font:{ size:10 },
-            callback: function(val){ return this.getLabelForValue(val); }
-          }
-        }
-      },
-      plugins:{
-        legend:{ display:false },
-        tooltip:{
-          backgroundColor:'#1c2333', borderColor:'#263047', borderWidth:1,
-          padding:12, titleColor:'#e6edf3', bodyColor:'#8b949e',
-          callbacks:{
-            label: ctx => ctx.raw===null ? null : ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
-            filter: item => item.raw !== null
-          }
-        }
-      }
-    },
+    options: chartOptions,
     plugins:[
       {
-        // 누적값 레이블 — 꺾은선 포인트 위
         id:'cum-labels',
         afterDatasetsDraw(chart) {
           const ctx = chart.ctx;
@@ -616,24 +675,18 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
             if (v === null) return;
             ctx.save();
             ctx.fillStyle = '#3fb950';
-            ctx.font = '700 11px "DM Mono",monospace';
-            ctx.textAlign = 'center';
-            ctx.fillText(v.toLocaleString()+'원', el.x, el.y - 16);
+            ctx.font = `700 ${isMobile?10:11}px "DM Mono",monospace`;            ctx.textAlign = 'center';
+            ctx.fillText(v.toLocaleString()+'원', el.x, el.y - 14);
             ctx.restore();
           });
         }
       },
       {
-        // 당일 사용액 — X축 눈금 아래에 45° 회전하여 표시
-        // chartArea.bottom 기준으로 그려서 항상 축 바로 아래에 위치
         id:'daily-axis-labels',
         afterDraw(chart) {
           const ctx   = chart.ctx;
           const xAxis = chart.scales.x;
-          // X축 눈금 텍스트의 실제 바닥 y 좌표 계산
-          // chart.chartArea.bottom = 차트 영역 아래, 그 뒤로 tick 높이(약 35px at 45°)가 있음
-          const tickBottom = chart.chartArea.bottom + 52; // 45° 회전 레이블 공간 아래
-
+          const tickBottom = chart.chartArea.bottom + (isMobile ? 44 : 52);
           xAxis.ticks.forEach((tick, i) => {
             const v = rawDaily[i];
             if (!v) return;
@@ -642,7 +695,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
             ctx.translate(xPos, tickBottom);
             ctx.rotate(-Math.PI / 4);
             ctx.fillStyle = '#58a6ff';
-            ctx.font = '600 9.5px "DM Mono",monospace';
+            ctx.font = `600 ${isMobile?8.5:9.5}px "DM Mono",monospace`;
             ctx.textAlign = 'right';
             ctx.fillText(v.toLocaleString()+'원', 0, 0);
             ctx.restore();
