@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>가계부 대시보드 2026년 3월</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0d1117;--bg2:#161c26;--bg3:#1c2333;--border:#263047;
+  --accent:#58a6ff;--green:#3fb950;--yellow:#d29922;--red:#f85149;
+  --orange:#ffa657;--text:#e6edf3;--text2:#8b949e;--text3:#484f58;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-serif;min-height:100vh;}
+
+/* ── Header ── */
+.header{background:linear-gradient(135deg,#161c26,#0d1117);border-bottom:1px solid var(--border);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;}
+.header h1{font-size:1.5rem;font-weight:900;background:linear-gradient(90deg,#58a6ff,#3fb950);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.header .sub{font-size:.75rem;color:var(--text3);margin-top:3px;}
+.date-badge{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:5px 14px;font-size:.8rem;color:var(--text2);font-family:'DM Mono',monospace;}
+
+/* ── Layout ── */
+.container{max-width:1440px;margin:0 auto;padding:24px 32px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:22px;}
+
+/* ── Summary top row ── */
+.top-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
+
+/* ── Summary Cards ── */
+.scard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px 24px;position:relative;overflow:hidden;}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.scard.cb::before{background:var(--accent)}.scard.cr::before{background:var(--red)}
+.scard-lbl{font-size:.68rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px;}
+.scard-val{font-family:'DM Mono',monospace;font-size:1.9rem;font-weight:500;}
+.scard.cb .scard-val{color:var(--accent)}.scard.cr .scard-val{color:var(--red)}
+.scard-sub{font-size:.73rem;color:var(--text3);margin-top:6px;}
+/* 지출 목표 진행 */
+.budget-progress{margin-top:14px;border-top:1px solid rgba(88,166,255,.2);padding-top:12px;}
+.budget-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.budget-lbl{font-size:.68rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.7px;}
+.budget-val{font-family:'DM Mono',monospace;font-size:.85rem;}
+.budget-bar-bg{background:var(--bg3);border-radius:99px;height:6px;overflow:hidden;margin:4px 0 10px;}
+.budget-bar-fill{height:6px;border-radius:99px;background:linear-gradient(90deg,var(--accent),rgba(88,166,255,.5));}
+.budget-remain-row{display:flex;justify-content:space-between;align-items:baseline;}
+.budget-remain-lbl{font-size:.7rem;color:var(--text3);}
+.budget-remain-val{font-family:'DM Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--green);}
+/* Ladder */
+.benefit-ladder{border-top:1px solid rgba(248,81,73,.2);padding:12px 0 4px 8px;margin-top:12px;}
+.ladder-item{display:flex;align-items:stretch;}
+.ladder-branch{width:20px;flex-shrink:0;position:relative;}
+.ladder-branch::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:rgba(248,81,73,.35);}
+.ladder-branch::after{content:'';position:absolute;left:8px;top:12px;width:10px;height:1px;background:rgba(248,81,73,.35);}
+.ladder-item.last .ladder-branch::before{height:12px;bottom:auto;}
+.ladder-content{flex:1;padding:5px 0 10px 6px;}
+.ladder-lbl{font-size:.65rem;color:var(--text3);font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:2px;}
+.ladder-val{font-family:'DM Mono',monospace;font-size:1.05rem;font-weight:500;line-height:1;}
+.ladder-sub{font-size:.67rem;color:var(--text3);margin-top:2px;}
+
+/* ── Panel ── */
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+.panel-hd{padding:14px 17px 0;}
+.sec-title{font-size:.74rem;font-weight:700;color:var(--text2);text-transform:uppercase;letter-spacing:1px;margin-bottom:13px;display:flex;align-items:center;gap:8px;}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border);}
+
+/* ── Tables ── */
+.tbl{width:100%;border-collapse:collapse;font-size:.79rem;}
+.tbl th{background:var(--bg3);color:var(--text3);font-weight:600;font-size:.67rem;text-transform:uppercase;letter-spacing:.4px;padding:8px 11px;border-bottom:1px solid var(--border);white-space:nowrap;}
+.tbl th.r{text-align:right}.tbl th.c{text-align:center}
+.tbl td{padding:8px 11px;border-bottom:1px solid rgba(38,48,71,.5);white-space:nowrap;}
+.tbl td.r{text-align:right}.tbl td.c{text-align:center}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:hover td{background:rgba(88,166,255,.04)}
+.tbl .tot td{font-weight:700;background:var(--bg3);border-top:1px solid var(--border);}
+.num{font-family:'DM Mono',monospace}
+.cb{color:var(--accent)}.cg{color:var(--green)}.cy{color:var(--yellow)}.cr{color:var(--red)}.t2{color:var(--text2)}.t3{color:var(--text3)}
+
+/* ── Badges ── */
+.bd{display:inline-block;padding:1px 7px;border-radius:4px;font-size:.67rem;font-weight:600;}
+.bd-b{background:rgba(88,166,255,.15);color:var(--accent)}
+.bd-g{background:rgba(63,185,80,.15);color:var(--green)}
+.bd-y{background:rgba(210,153,34,.15);color:var(--yellow)}
+.bd-r{background:rgba(248,81,73,.15);color:var(--red)}
+.bd-p{background:rgba(255,166,87,.15);color:var(--orange)}
+
+/* ── Performance ── */
+.perf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.perf-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px 22px;}
+.perf-name{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:13px;}
+.perf-row{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:7px;}
+.perf-row span:first-child{color:var(--text3)}
+.perf-row span:last-child{font-family:'DM Mono',monospace;color:var(--text2)}
+.perf-bar-bg{background:var(--bg2);border-radius:99px;height:9px;overflow:hidden;margin:13px 0 6px;}
+.perf-bar-fill{height:9px;border-radius:99px;}
+.perf-pct-row{display:flex;justify-content:space-between;font-size:.8rem;}
+.perf-pct{font-family:'DM Mono',monospace;font-weight:700;font-size:.95rem;}
+
+/* ── Combo chart wrapper ── */
+.combo-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:17px 19px 0;margin-bottom:22px;}
+/* extra bottom space so the rotated labels below x-axis are visible inside the panel */
+.combo-inner{padding-bottom:0;}
+.combo-meta{display:flex;gap:20px;padding:10px 0 16px;}
+.combo-meta-item{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text2);}
+.combo-meta-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0;}
+.combo-meta-line{width:18px;height:3px;border-radius:2px;flex-shrink:0;}
+
+/* ── Donut charts ── */
+.chart-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:17px 19px;}
+.donut-inner{display:flex;align-items:center;gap:18px;}
+.donut-inner canvas{flex-shrink:0;}
+.legend-box{flex:1;min-width:0;}
+.leg-item{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(38,48,71,.4);}
+.leg-item:last-child{border-bottom:none}
+.leg-left{display:flex;align-items:center;gap:7px;font-size:.76rem;color:var(--text2);}
+.leg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.leg-right{text-align:right}
+.leg-val{font-family:'DM Mono',monospace;font-size:.76rem;color:var(--text);}
+.leg-pct{font-size:.67rem;color:var(--text3);margin-left:3px;}
+.leg-total{margin-top:8px;padding-top:8px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:.75rem;}
+.leg-total-lbl{color:var(--text3)}
+.leg-total-val{font-family:'DM Mono',monospace;color:var(--accent);font-weight:700;}
+
+/* ── Notice ── */
+.notice{margin-top:10px;padding:9px 13px;background:var(--bg3);border-radius:8px;font-size:.72rem;color:var(--text3);line-height:1.8;}
+.notice strong{color:var(--text2);}
+
+/* ── Detail table ── */
+.dtbl-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:17px 19px;margin-bottom:22px;}
+.dtbl{width:100%;border-collapse:collapse;font-size:.77rem;}
+.dtbl th{background:var(--bg3);color:var(--text3);font-weight:600;font-size:.66rem;text-transform:uppercase;letter-spacing:.4px;padding:8px 9px;border-bottom:1px solid var(--border);white-space:nowrap;}
+.dtbl th.r{text-align:right}.dtbl th.c{text-align:center}
+.dtbl td{padding:7px 9px;border-bottom:1px solid rgba(38,48,71,.4);white-space:nowrap;}
+.dtbl td.r{text-align:right}.dtbl td.c{text-align:center}
+.dtbl tr:last-child td{border-bottom:none}
+.dtbl tr:hover td{background:rgba(88,166,255,.04)}
+.hl-y td{background:rgba(210,153,34,.05)!important}
+.hl-r td{background:rgba(248,81,73,.05)!important}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>💰 가계부 대시보드</h1>
+    <div class="sub">2026년 3월 · 1주차 (03/01 ~ 03/02) · 유효 11건 ('기본' 항목 4건 제외)</div>
+  </div>
+  <div class="date-badge">2026-03-01 ~ 2026-03-02</div>
+</div>
+
+<div class="container">
+
+  <!-- ① 요약 카드 (2개) -->
+  <div class="top-row">
+    <div class="scard cb" style="padding-bottom:16px;">
+      <div class="scard-lbl">총 지출</div>
+      <div class="scard-val">276,020</div>
+      <div class="scard-sub">유효 11건 · '기본' 4건 제외 · 2026-03-01 ~ 03-02</div>
+      <div class="budget-progress">
+        <div class="budget-row">
+          <span class="budget-lbl">월 목표 지출</span>
+          <span class="budget-val cb">3,000,000원</span>
+        </div>
+        <div class="budget-bar-bg">
+          <div class="budget-bar-fill" style="width:9.2%;"></div>
+        </div>
+        <div class="budget-remain-row">
+          <span class="budget-remain-lbl">잔여 예산 <span style="color:var(--text3);font-size:.65rem;">(달성률 9.2%)</span></span>
+          <span class="budget-remain-val">2,723,980원</span>
+        </div>
+      </div>
+    </div>
+    <div class="scard cr" style="padding-bottom:0;">
+      <div class="scard-lbl">총 혜택 합계</div>
+      <div class="scard-val">17,319</div>
+      <div class="scard-sub">지출 대비 6.3%</div>
+      <div class="benefit-ladder">
+        <div class="ladder-item">
+          <div class="ladder-branch"></div>
+          <div class="ladder-content">
+            <div class="ladder-lbl">총 적립혜택</div>
+            <div class="ladder-val cg">4,731</div>
+            <div class="ladder-sub">신한더모아 4,483 · 신한RPM 248</div>
+          </div>
+        </div>
+        <div class="ladder-item last">
+          <div class="ladder-branch"></div>
+          <div class="ladder-content">
+            <div class="ladder-lbl">총 할인혜택</div>
+            <div class="ladder-val cy">12,588</div>
+            <div class="ladder-sub">하나카드SK 11,120 · 롯데카드 1,468</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 카드별 실적 달성 현황 (차트 바로 위) -->
+  <div class="panel" style="margin-bottom:22px;">
+    <div class="panel-hd"><div class="sec-title">카드별 실적 달성 현황</div></div>
+    <div style="padding:14px 17px 17px;">
+      <div class="perf-grid" id="perfGrid"></div>
+
+    </div>
+  </div>
+
+  <!-- ③ 일별 지출 현황 복합 차트 -->
+  <div class="combo-wrap">
+    <div class="panel-hd"><div class="sec-title">일별 지출 현황 (막대: 당일 사용액 / 선: 누적 사용액)</div></div>
+    <div class="combo-inner">
+      <canvas id="dailyComboChart" height="130"></canvas>
+    </div>
+    <div class="combo-meta">
+      <div class="combo-meta-item"><div class="combo-meta-dot" style="background:rgba(88,166,255,.7);"></div><span>당일 사용액 (막대)</span></div>
+      <div class="combo-meta-item"><div class="combo-meta-line" style="background:#3fb950;"></div><span>누적 사용액 (꺾은선)</span></div>
+    </div>
+  </div>
+
+  <!-- ④ 항목별 / 카드사별 사용액 -->
+  <div class="grid2">
+    <div class="panel">
+      <div class="panel-hd"><div class="sec-title">항목별 사용액 (C1 - C2 기준)</div></div>
+      <table class="tbl">
+        <thead><tr><th>C1</th><th>C2</th><th class="r">건수</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
+        <tbody>
+          <tr><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="r num t3">4</td><td class="r num cb">109,780</td><td class="r num cg">1,238</td><td class="r num cy">6,468</td></tr>
+          <tr><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="r num t3">3</td><td class="r num cb">60,850</td><td class="r num cg">500</td><td class="r num t3">-</td></tr>
+          <tr><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="r num t3">2</td><td class="r num cb">93,396</td><td class="r num cg">999</td><td class="r num cy">6,120</td></tr>
+          <tr><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="r num t3">2</td><td class="r num cb">11,994</td><td class="r num cg">1,994</td><td class="r num t3">-</td></tr>
+          <tr class="tot"><td colspan="2">합계</td><td class="r num">11</td><td class="r num cb">276,020</td><td class="r num cg">4,731</td><td class="r num cy">12,588</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="sec-title">카드사별 사용액</div></div>
+      <table class="tbl">
+        <thead><tr><th>카드</th><th class="r">건수</th><th class="c">실적</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
+        <tbody>
+          <tr><td><span class="bd bd-b">신한더모아</span></td><td class="r num t3">5</td><td class="c"><span class="bd bd-g">5건 인정</span></td><td class="r num cb">31,483</td><td class="r num cg">4,483</td><td class="r num t3">-</td></tr>
+          <tr><td><span class="bd bd-g">하나카드SK</span></td><td class="r num t3">4</td><td class="c"><span class="bd bd-r">2건 인정</span></td><td class="r num cb">217,437</td><td class="r num t3">-</td><td class="r num cy">11,120</td></tr>
+          <tr><td><span class="bd bd-p">신한RPM</span></td><td class="r num t3">1</td><td class="c"><span class="bd bd-g">1건 인정</span></td><td class="r num cb">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td></tr>
+          <tr><td><span class="bd bd-r">롯데카드</span></td><td class="r num t3">1</td><td class="c"><span class="bd bd-r">0건 인정</span></td><td class="r num cb">14,680</td><td class="r num t3">-</td><td class="r num cy">1,468</td></tr>
+          <tr class="tot"><td>합계</td><td class="r num">11</td><td class="c">8건</td><td class="r num cb">276,020</td><td class="r num cg">4,731</td><td class="r num cy">12,588</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑤ 혜택 상세 3분할 -->
+  <div class="grid3">
+    <div class="panel">
+      <div class="panel-hd"><div class="sec-title">적립혜택 상세</div></div>
+      <table class="tbl">
+        <thead><tr><th>카드</th><th>사용처</th><th class="r">적립액</th></tr></thead>
+        <tbody>
+          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.6)</td><td class="r num cg">999</td></tr>
+          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">폴바셋 커피(No.8)</td><td class="r num cg">500</td></tr>
+          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 6회(No.10)</td><td class="r num cg">997</td></tr>
+          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.14)</td><td class="r num cg">990</td></tr>
+          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 5회(No.15)</td><td class="r num cg">997</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2">신한더모아 소계</td><td></td><td class="r num cg">4,483</td></tr>
+          <tr><td>신한RPM</td><td class="t3" style="font-size:.71rem;">이마트 삼겹살(No.13)</td><td class="r num cg">248</td></tr>
+          <tr class="tot"><td colspan="2">합계</td><td class="r num cg">4,731</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="sec-title">할인혜택 상세</div></div>
+      <table class="tbl">
+        <thead><tr><th>카드</th><th>사용처</th><th class="r">할인율</th><th class="r">할인액</th></tr></thead>
+        <tbody>
+          <tr><td>하나카드SK</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.5)</td><td class="r num t3">7.0%</td><td class="r num cy">6,120</td></tr>
+          <tr><td>롯데카드</td><td class="t3" style="font-size:.71rem;">쿠팡 프레시(No.7)</td><td class="r num t3">10.0%</td><td class="r num cy">1,468</td></tr>
+          <tr><td>하나카드SK</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.12)</td><td class="r num t3">6.6%</td><td class="r num cy">5,000</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2">하나카드SK 소계</td><td colspan="2"></td><td class="r num cy">11,120</td></tr>
+          <tr><td class="t2">롯데카드 소계</td><td colspan="2"></td><td class="r num cy">1,468</td></tr>
+          <tr class="tot"><td colspan="3">합계</td><td class="r num cy">12,588</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="sec-title">혜택 종합</div></div>
+      <table class="tbl">
+        <thead><tr><th>구분</th><th>카드</th><th class="r">금액</th><th class="r">비율</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="2"><span class="bd bd-g">적립</span></td><td class="t3" style="font-size:.71rem;">신한더모아</td><td class="r num cg">4,483</td><td class="r t3 num">1.6%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;">신한RPM</td><td class="r num cg">248</td><td class="r t3 num">0.1%</td></tr>
+          <tr><td><span class="bd bd-g">적립 소계</span></td><td></td><td class="r num cg">4,731</td><td class="r t3 num">1.7%</td></tr>
+          <tr><td rowspan="2"><span class="bd bd-y">할인</span></td><td class="t3" style="font-size:.71rem;">하나카드SK</td><td class="r num cy">11,120</td><td class="r t3 num">4.0%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;">롯데카드</td><td class="r num cy">1,468</td><td class="r t3 num">0.5%</td></tr>
+          <tr><td><span class="bd bd-y">할인 소계</span></td><td></td><td class="r num cy">12,588</td><td class="r t3 num">4.6%</td></tr>
+          <tr class="tot"><td colspan="2">최종 합계</td><td class="r num cr">17,319</td><td class="r num" style="color:var(--orange)">6.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ⑥ 도넛 차트 -->
+  <div class="grid2">
+    <div class="chart-wrap">
+      <div class="sec-title">항목별 지출 비중 (C1-C2)</div>
+      <div class="donut-inner">
+        <canvas id="catChart" width="185" height="185"></canvas>
+        <div class="legend-box" id="catLegend"></div>
+      </div>
+    </div>
+    <div class="chart-wrap">
+      <div class="sec-title">카드사별 지출 비중</div>
+      <div class="donut-inner">
+        <canvas id="cardPieChart" width="185" height="185"></canvas>
+        <div class="legend-box" id="cardLegend"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑦ 혜택·카드 바 차트 -->
+  <div class="grid2">
+    <div class="chart-wrap">
+      <div class="sec-title">항목별 혜택 비교 (적립 vs 할인)</div>
+      <canvas id="benefitChart" height="210"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div class="sec-title">카드사별 지출금액 비교</div>
+      <canvas id="cardBarChart" height="210"></canvas>
+    </div>
+  </div>
+
+  <!-- ⑧ 상세 내역 -->
+  <div class="dtbl-wrap">
+    <div class="sec-title">상세 사용 내역 — 2026년 3월 1주차 <span style="font-size:.7rem;color:var(--red);font-weight:400;text-transform:none;letter-spacing:0;">&nbsp;('기본' 항목 No.1~4 제외)</span></div>
+    <div style="overflow-x:auto;">
+      <table class="dtbl">
+        <thead>
+          <tr>
+            <th class="c">No</th><th>날짜</th><th class="c">요일</th>
+            <th>C1</th><th>C2</th><th>상세</th><th>사용카드</th>
+            <th class="r">금액</th><th class="r">적립</th><th class="r">할인</th>
+            <th class="r">할인율</th><th class="c">실적</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="hl-y"><td class="c t3 num">5</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>하나카드SK</td><td class="r num">87,397</td><td class="r num t3">-</td><td class="r num cy">6,120</td><td class="r t3">7.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">6</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>신한더모아</td><td class="r num">5,999</td><td class="r num cg">999</td><td class="r num t3">-</td><td class="r t3">16.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">7</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">쿠팡 프레시</td><td>롯데카드</td><td class="r num">14,680</td><td class="r num t3">-</td><td class="r num cy">1,468</td><td class="r t3">10.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">8</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신세계 시흥 아울렛 폴바셋 민준이 커피씀</td><td>신한더모아</td><td class="r num">6,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">7.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">9</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신세계 시흥 아울렛 폴바셋 민준이 커피씀</td><td>하나카드SK</td><td class="r num">26,300</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">10</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 6회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">11</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">도미노피자</td><td>하나카드SK</td><td class="r num">28,050</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-r"><td class="c t3 num">12</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트중동점</td><td>하나카드SK</td><td class="r num">75,690</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">6.6%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">13</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트중동점, 삼겹살 국산</td><td>신한RPM</td><td class="r num">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">14</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트중동점</td><td>신한더모아</td><td class="r num">6,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">14.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">15</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+// ① 일별 복합 차트 (3월 전체 31일)
+// ══════════════════════════════════════════════════════════════════════════════
+(function() {
+  const DAYS = 31;
+  const DOW  = ['일','월','화','수','목','금','토'];
+  const labels = Array.from({length:DAYS},(_,i) => {
+    const d = i + 1;
+    return `03/${String(d).padStart(2,'0')}(${DOW[new Date(2026,2,d).getDay()]})`;
+  });
+
+  // 당일 사용액
+  const rawDaily = new Array(DAYS).fill(null);
+  rawDaily[0] = 101097;   // 03/01
+  rawDaily[1] = 174923;   // 03/02
+
+  // 누적 사용액
+  const cumAmt = new Array(DAYS).fill(null);
+  let run = 0;
+  for (let i = 0; i < DAYS; i++) {
+    if (rawDaily[i] !== null) run += rawDaily[i];
+    if (i <= 1) cumAmt[i] = run;
+  }
+
+  const yMax = 400000;
+
+  const dailyChart = new Chart(document.getElementById('dailyComboChart'), {
+    data: {
+      labels,
+      datasets: [
+        {
+          type:'bar', label:'당일 사용액', data:rawDaily,
+          backgroundColor:'rgba(88,166,255,.6)', borderColor:'rgba(88,166,255,.85)',
+          borderWidth:1, borderRadius:6, borderSkipped:false, order:2, yAxisID:'y'
+        },
+        {
+          type:'line', label:'누적 사용액', data:cumAmt,
+          borderColor:'#3fb950', borderWidth:2.5,
+          pointBackgroundColor:'#3fb950', pointBorderColor:'#0d1117', pointBorderWidth:2,
+          pointRadius: ctx => ctx.raw !== null ? 7 : 0,
+          pointHoverRadius:9, tension:0.1, fill:false, spanGaps:false, order:1, yAxisID:'y'
+        }
+      ]
+    },
+    options: {
+      responsive:true,
+      // top padding for cumulative labels, bottom padding for daily-amount labels below x-axis
+      layout:{ padding:{ top:38, right:20, bottom:80, left:4 } },
+      interaction:{ mode:'index', intersect:false },
+      scales: {
+        y:{
+          min:0, max:yMax,
+          grid:{ color:'rgba(38,48,71,.65)' },
+          ticks:{ color:'#8b949e', maxTicksLimit:7, callback:v => v===0?'0':(v/10000)+'만' }
+        },
+        x:{
+          grid:{ color:'rgba(38,48,71,.3)' },
+          ticks:{
+            color: ctx => ctx.index<=1 ? '#8b949e' : '#2e3847',
+            maxRotation:45, minRotation:45, font:{ size:10 },
+            callback: function(val){ return this.getLabelForValue(val); }
+          }
+        }
+      },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          backgroundColor:'#1c2333', borderColor:'#263047', borderWidth:1,
+          padding:12, titleColor:'#e6edf3', bodyColor:'#8b949e',
+          callbacks:{
+            label: ctx => ctx.raw===null ? null : ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
+            filter: item => item.raw !== null
+          }
+        }
+      }
+    },
+    plugins:[
+      {
+        // 누적값 레이블 — 꺾은선 포인트 위
+        id:'cum-labels',
+        afterDatasetsDraw(chart) {
+          const ctx = chart.ctx;
+          const ds  = chart.data.datasets[1];
+          const meta= chart.getDatasetMeta(1);
+          meta.data.forEach((el,i) => {
+            const v = ds.data[i];
+            if (v === null) return;
+            ctx.save();
+            ctx.fillStyle = '#3fb950';
+            ctx.font = '700 11px "DM Mono",monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText(v.toLocaleString()+'원', el.x, el.y - 16);
+            ctx.restore();
+          });
+        }
+      },
+      {
+        // 당일 사용액 — X축 눈금 아래에 45° 회전하여 표시
+        // chartArea.bottom 기준으로 그려서 항상 축 바로 아래에 위치
+        id:'daily-axis-labels',
+        afterDraw(chart) {
+          const ctx   = chart.ctx;
+          const xAxis = chart.scales.x;
+          // X축 눈금 텍스트의 실제 바닥 y 좌표 계산
+          // chart.chartArea.bottom = 차트 영역 아래, 그 뒤로 tick 높이(약 35px at 45°)가 있음
+          const tickBottom = chart.chartArea.bottom + 52; // 45° 회전 레이블 공간 아래
+
+          xAxis.ticks.forEach((tick, i) => {
+            const v = rawDaily[i];
+            if (!v) return;
+            const xPos = xAxis.getPixelForTick(i);
+            ctx.save();
+            ctx.translate(xPos, tickBottom);
+            ctx.rotate(-Math.PI / 4);
+            ctx.fillStyle = '#58a6ff';
+            ctx.font = '600 9.5px "DM Mono",monospace';
+            ctx.textAlign = 'right';
+            ctx.fillText(v.toLocaleString()+'원', 0, 0);
+            ctx.restore();
+          });
+        }
+      }
+    ]
+  });
+})();
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ② 공통 설정
+// ══════════════════════════════════════════════════════════════════════════════
+Chart.defaults.font.family = "'Noto Sans KR','DM Mono',sans-serif";
+Chart.defaults.color = '#8b949e';
+const gridC = 'rgba(38,48,71,.65)';
+const tip = {
+  backgroundColor:'#1c2333', borderColor:'#263047', borderWidth:1,
+  padding:10, titleColor:'#e6edf3', bodyColor:'#8b949e',
+  callbacks:{ label: ctx => ` ${ctx.raw.toLocaleString()}원` }
+};
+
+const TOTAL = 276020;
+const catLabels  = ['식비-식재료','식비-외식비','교통비-유류비','보험료-연금보험료'];
+const catVals    = [109780, 60850, 93396, 11994];
+const catColors  = ['#58a6ff','#3fb950','#d29922','#f85149'];
+const cardLabels = ['신한더모아','하나카드SK','신한RPM','롯데카드'];
+const cardVals   = [31483, 217437, 12420, 14680];
+const cardColors = ['#58a6ff','#3fb950','#ffa657','#f85149'];
+
+function buildLegend(id, labels, vals, colors, total) {
+  const el = document.getElementById(id);
+  el.innerHTML = labels.map((lbl,i) => {
+    const pct = ((vals[i]/total)*100).toFixed(1);
+    return `<div class="leg-item">
+      <div class="leg-left"><div class="leg-dot" style="background:${colors[i]};"></div><span>${lbl}</span></div>
+      <div class="leg-right"><span class="leg-val">${vals[i].toLocaleString()}</span><span class="leg-pct">${pct}%</span></div>
+    </div>`;
+  }).join('') + `<div class="leg-total"><span class="leg-total-lbl">합계</span><span class="leg-total-val">${total.toLocaleString()}원</span></div>`;
+}
+buildLegend('catLegend',  catLabels,  catVals,  catColors,  TOTAL);
+buildLegend('cardLegend', cardLabels, cardVals, cardColors, TOTAL);
+
+new Chart(document.getElementById('catChart'), {
+  type:'doughnut',
+  data:{ labels:catLabels, datasets:[{ data:catVals, backgroundColor:catColors.map(c=>c+'cc'), borderColor:'#0d1117', borderWidth:3, hoverOffset:8 }] },
+  options:{ cutout:'68%', responsive:false, plugins:{ legend:{display:false}, tooltip:{ ...tip, callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.raw.toLocaleString()}원 (${((ctx.raw/TOTAL)*100).toFixed(1)}%)` } } } }
+});
+new Chart(document.getElementById('cardPieChart'), {
+  type:'doughnut',
+  data:{ labels:cardLabels, datasets:[{ data:cardVals, backgroundColor:cardColors.map(c=>c+'cc'), borderColor:'#0d1117', borderWidth:3, hoverOffset:8 }] },
+  options:{ cutout:'68%', responsive:false, plugins:{ legend:{display:false}, tooltip:{ ...tip, callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.raw.toLocaleString()}원 (${((ctx.raw/TOTAL)*100).toFixed(1)}%)` } } } }
+});
+
+const valLabelPlugin = {
+  id:'val-labels',
+  afterDatasetsDraw(chart) {
+    const ctx = chart.ctx;
+    chart.data.datasets.forEach((ds,di) => {
+      const meta = chart.getDatasetMeta(di);
+      const color = di===0?'#3fb950':'#d29922';
+      meta.data.forEach((bar,i) => {
+        const v = ds.data[i]; if(!v) return;
+        ctx.save(); ctx.fillStyle=color; ctx.font='600 10.5px "DM Mono",monospace'; ctx.textAlign='center';
+        ctx.fillText(v.toLocaleString(), bar.x, bar.y-5); ctx.restore();
+      });
+    });
+  }
+};
+new Chart(document.getElementById('benefitChart'), {
+  type:'bar',
+  data:{ labels:['식비\n식재료','식비\n외식비','교통비\n유류비','보험료\n연금보험료'],
+    datasets:[
+      { label:'적립혜택', data:[1238,500,999,1994], backgroundColor:'rgba(63,185,80,.75)', borderRadius:5 },
+      { label:'할인혜택', data:[6468,0,6120,0],     backgroundColor:'rgba(210,153,34,.75)', borderRadius:5 }
+    ]
+  },
+  options:{ scales:{ x:{grid:{color:gridC},ticks:{color:'#8b949e'}}, y:{grid:{color:gridC},ticks:{color:'#8b949e',callback:v=>v.toLocaleString()}} }, plugins:{ legend:{labels:{color:'#8b949e',usePointStyle:true,pointStyleWidth:10}}, tooltip:{...tip} } },
+  plugins:[valLabelPlugin]
+});
+
+const hbarPlugin = {
+  id:'hbar-labels',
+  afterDatasetsDraw(chart) {
+    const ctx=chart.ctx, meta=chart.getDatasetMeta(0), vals=chart.data.datasets[0].data;
+    meta.data.forEach((bar,i) => {
+      ctx.save(); ctx.fillStyle='#e6edf3'; ctx.font='500 10.5px "DM Mono",monospace'; ctx.textAlign='left';
+      ctx.fillText(vals[i].toLocaleString()+'원', bar.x+6, bar.y+4); ctx.restore();
+    });
+  }
+};
+new Chart(document.getElementById('cardBarChart'), {
+  type:'bar',
+  data:{ labels:cardLabels, datasets:[{ label:'지출금액', data:cardVals, backgroundColor:cardColors.map(c=>c+'bb'), borderRadius:6 }] },
+  options:{ indexAxis:'y', scales:{ x:{grid:{color:gridC},ticks:{color:'#8b949e',callback:v=>v.toLocaleString()}}, y:{grid:{color:'transparent'},ticks:{color:'#e6edf3'}} },
+    plugins:{ legend:{display:false}, tooltip:{...tip,callbacks:{label:ctx=>` ${ctx.label}: ${ctx.raw.toLocaleString()}원 / 전체합계: ${TOTAL.toLocaleString()}원`}} } },
+  plugins:[hbarPlugin]
+});
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ③ 실적 달성
+// ══════════════════════════════════════════════════════════════════════════════
+const perfData = [
+  { name:'신한더모아', cls:'bd-b', total:31483,  achieved:31483,  target:300000,  color:'#58a6ff' },
+  { name:'하나카드SK', cls:'bd-g', total:217437, achieved:54350,  target:200000,  color:'#3fb950' },
+  { name:'신한RPM',   cls:'bd-p', total:12420,  achieved:12420,  target:1500000, color:'#ffa657' },
+  { name:'롯데카드',  cls:'bd-r', total:14680,  achieved:0,       target:300000,  color:'#f85149' },
+];
+document.getElementById('perfGrid').innerHTML = perfData.map(p => {
+  const raw = (p.achieved/p.target)*100;
+  const pct = Math.min(raw,100);
+  const col = raw>=100?'#3fb950':raw>=50?'#ffa657':raw>0?'#58a6ff':'#f85149';
+  return `<div class="perf-card">
+    <div class="perf-name"><span class="bd ${p.cls}">${p.name}</span></div>
+    <div class="perf-row"><span>현재 사용총액</span><span>${p.total.toLocaleString()}원</span></div>
+    <div class="perf-row"><span>실적인정 금액</span><span>${p.achieved.toLocaleString()}원</span></div>
+    <div class="perf-row"><span>목표 금액</span><span>${p.target.toLocaleString()}원</span></div>
+    <div class="perf-row"><span>잔여 금액</span><span>${Math.max(p.target-p.achieved,0).toLocaleString()}원</span></div>
+    <div class="perf-bar-bg"><div class="perf-bar-fill" style="width:${pct}%;background:${col};"></div></div>
+    <div class="perf-pct-row"><span style="color:var(--text3);font-size:.71rem;">달성률</span><span class="perf-pct" style="color:${col};">${raw.toFixed(1)}%</span></div>
+  </div>`;
+}).join('');
+</script>
+</body>
+</html>
