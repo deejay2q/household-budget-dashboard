@@ -23,8 +23,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 /* ── Layout ── */
 .container{max-width:1440px;margin:0 auto;padding:24px 32px;}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px;}
-.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:22px;}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:22px;}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:22px;}
 
 /* ── Summary top row ── */
 .top-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px;}
@@ -69,11 +69,17 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .tbl{width:100%;border-collapse:collapse;font-size:.79rem;}
 .tbl th{background:var(--bg3);color:var(--text3);font-weight:600;font-size:.67rem;text-transform:uppercase;letter-spacing:.4px;padding:8px 11px;border-bottom:1px solid var(--border);white-space:nowrap;}
 .tbl th.r{text-align:right}.tbl th.c{text-align:center}
-.tbl td{padding:8px 11px;border-bottom:1px solid rgba(38,48,71,.5);white-space:nowrap;}
+.tbl td{padding:8px 11px;border-bottom:1px solid rgba(38,48,71,.5);}
 .tbl td.r{text-align:right}.tbl td.c{text-align:center}
 .tbl tr:last-child td{border-bottom:none}
 .tbl tr:hover td{background:rgba(88,166,255,.04)}
 .tbl .tot td{font-weight:700;background:var(--bg3);border-top:1px solid var(--border);}
+
+/* grid3 중간 너비 대응 (900px 이하) — 2열+1열 */
+@media (max-width:900px) and (min-width:769px) {
+  .grid3{grid-template-columns:1fr 1fr;}
+  .grid3 > .panel:last-child{grid-column:1 / -1;}
+}
 .num{font-family:'DM Mono',monospace}
 .cb{color:var(--accent)}.cg{color:var(--green)}.cy{color:var(--yellow)}.cr{color:var(--red)}.t2{color:var(--text2)}.t3{color:var(--text3)}
 
@@ -373,48 +379,54 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="grid3">
     <div class="panel">
       <div class="panel-hd"><div class="sec-title">적립혜택 상세</div></div>
+      <div style="overflow-x:auto;">
       <table class="tbl">
         <thead><tr><th>카드</th><th>사용처</th><th class="r">적립액</th></tr></thead>
         <tbody>
-          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.6)</td><td class="r num cg">999</td></tr>
-          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">폴바셋 커피(No.8)</td><td class="r num cg">500</td></tr>
-          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 6회(No.10)</td><td class="r num cg">997</td></tr>
-          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.14)</td><td class="r num cg">990</td></tr>
-          <tr><td>신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 5회(No.15)</td><td class="r num cg">997</td></tr>
-          <tr style="border-top:1px solid var(--border)"><td class="t2">신한더모아 소계</td><td></td><td class="r num cg">4,483</td></tr>
-          <tr><td>신한RPM</td><td class="t3" style="font-size:.71rem;">이마트 삼겹살(No.13)</td><td class="r num cg">248</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.6)</td><td class="r num cg">999</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">폴바셋 커피(No.8)</td><td class="r num cg">500</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 6회(No.10)</td><td class="r num cg">997</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.14)</td><td class="r num cg">990</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 5회(No.15)</td><td class="r num cg">997</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap">신한더모아 소계</td><td></td><td class="r num cg">4,483</td></tr>
+          <tr><td style="white-space:nowrap">신한RPM</td><td class="t3" style="font-size:.71rem;">이마트 삼겹살(No.13)</td><td class="r num cg">248</td></tr>
           <tr class="tot"><td colspan="2">합계</td><td class="r num cg">4,731</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="panel">
       <div class="panel-hd"><div class="sec-title">할인혜택 상세</div></div>
+      <div style="overflow-x:auto;">
       <table class="tbl">
-        <thead><tr><th>카드</th><th>사용처</th><th class="r">할인율</th><th class="r">할인액</th></tr></thead>
+        <thead><tr><th style="white-space:nowrap">카드</th><th>사용처</th><th class="r" style="white-space:nowrap">할인율</th><th class="r" style="white-space:nowrap">할인액</th></tr></thead>
         <tbody>
-          <tr><td>하나카드SK</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.5)</td><td class="r num t3">7.0%</td><td class="r num cy">6,120</td></tr>
-          <tr><td>롯데카드</td><td class="t3" style="font-size:.71rem;">쿠팡 프레시(No.7)</td><td class="r num t3">10.0%</td><td class="r num cy">1,468</td></tr>
-          <tr><td>하나카드SK</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.12)</td><td class="r num t3">6.6%</td><td class="r num cy">5,000</td></tr>
-          <tr style="border-top:1px solid var(--border)"><td class="t2">하나카드SK 소계</td><td colspan="2"></td><td class="r num cy">11,120</td></tr>
-          <tr><td class="t2">롯데카드 소계</td><td colspan="2"></td><td class="r num cy">1,468</td></tr>
+          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.5)</td><td class="r num t3">7.0%</td><td class="r num cy">6,120</td></tr>
+          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">쿠팡 프레시(No.7)</td><td class="r num t3">10.0%</td><td class="r num cy">1,468</td></tr>
+          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">이마트중동점(No.12)</td><td class="r num t3">6.6%</td><td class="r num cy">5,000</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap">하나카드SK 소계</td><td colspan="2"></td><td class="r num cy">11,120</td></tr>
+          <tr><td class="t2" style="white-space:nowrap">롯데카드 소계</td><td colspan="2"></td><td class="r num cy">1,468</td></tr>
           <tr class="tot"><td colspan="3">합계</td><td class="r num cy">12,588</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="panel">
       <div class="panel-hd"><div class="sec-title">혜택 종합</div></div>
+      <div style="overflow-x:auto;">
       <table class="tbl">
         <thead><tr><th>구분</th><th>카드</th><th class="r">금액</th><th class="r">비율</th></tr></thead>
         <tbody>
-          <tr><td rowspan="2"><span class="bd bd-g">적립</span></td><td class="t3" style="font-size:.71rem;">신한더모아</td><td class="r num cg">4,483</td><td class="r t3 num">1.6%</td></tr>
-          <tr><td class="t3" style="font-size:.71rem;">신한RPM</td><td class="r num cg">248</td><td class="r t3 num">0.1%</td></tr>
-          <tr><td><span class="bd bd-g">적립 소계</span></td><td></td><td class="r num cg">4,731</td><td class="r t3 num">1.7%</td></tr>
-          <tr><td rowspan="2"><span class="bd bd-y">할인</span></td><td class="t3" style="font-size:.71rem;">하나카드SK</td><td class="r num cy">11,120</td><td class="r t3 num">4.0%</td></tr>
-          <tr><td class="t3" style="font-size:.71rem;">롯데카드</td><td class="r num cy">1,468</td><td class="r t3 num">0.5%</td></tr>
-          <tr><td><span class="bd bd-y">할인 소계</span></td><td></td><td class="r num cy">12,588</td><td class="r t3 num">4.6%</td></tr>
-          <tr class="tot"><td colspan="2">최종 합계</td><td class="r num cr">17,319</td><td class="r num" style="color:var(--orange)">6.3%</td></tr>
+          <tr><td rowspan="2"><span class="bd bd-g">적립</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">신한더모아</td><td class="r num cg">4,483</td><td class="r t3 num">1.6%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">신한RPM</td><td class="r num cg">248</td><td class="r t3 num">0.1%</td></tr>
+          <tr><td style="white-space:nowrap"><span class="bd bd-g">적립 소계</span></td><td></td><td class="r num cg">4,731</td><td class="r t3 num">1.7%</td></tr>
+          <tr><td rowspan="2"><span class="bd bd-y">할인</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">하나카드SK</td><td class="r num cy">11,120</td><td class="r t3 num">4.0%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">롯데카드</td><td class="r num cy">1,468</td><td class="r t3 num">0.5%</td></tr>
+          <tr><td style="white-space:nowrap"><span class="bd bd-y">할인 소계</span></td><td></td><td class="r num cy">12,588</td><td class="r t3 num">4.6%</td></tr>
+          <tr class="tot"><td colspan="2" style="white-space:nowrap">최종 합계</td><td class="r num cr">17,319</td><td class="r num" style="color:var(--orange)">6.3%</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 
@@ -799,18 +811,23 @@ new Chart(document.getElementById('cardBarChart'), {
 // ③ 실적 달성
 // ══════════════════════════════════════════════════════════════════════════════
 const perfData = [
-  { name:'신한더모아', cls:'bd-b', total:31483,  achieved:31483,  target:300000,  color:'#58a6ff' },
-  { name:'하나카드SK', cls:'bd-g', total:217437, achieved:54350,  target:200000,  color:'#3fb950' },
-  { name:'신한RPM',   cls:'bd-p', total:12420,  achieved:12420,  target:1500000, color:'#ffa657' },
-  { name:'롯데카드',  cls:'bd-r', total:14680,  achieved:0,       target:300000,  color:'#f85149' },
+  { name:'신한더모아', cls:'bd-b', total:31483,  achieved:31483,  target:300000,  color:'#58a6ff', save:4483,  disc:0 },
+  { name:'하나카드SK', cls:'bd-g', total:217437, achieved:54350,  target:200000,  color:'#3fb950', save:0,     disc:11120 },
+  { name:'신한RPM',   cls:'bd-p', total:12420,  achieved:12420,  target:1500000, color:'#ffa657', save:248,   disc:0 },
+  { name:'롯데카드',  cls:'bd-r', total:14680,  achieved:0,       target:300000,  color:'#f85149', save:0,     disc:1468 },
 ];
 document.getElementById('perfGrid').innerHTML = perfData.map(p => {
   const raw = (p.achieved/p.target)*100;
   const pct = Math.min(raw,100);
   const col = raw>=100?'#3fb950':raw>=50?'#ffa657':raw>0?'#58a6ff':'#f85149';
+  const benefitRows = [
+    p.save > 0 ? `<div class="perf-row"><span style="color:var(--text3);">적립금액 총액</span><span style="font-family:'DM Mono',monospace;color:#3fb950;">${p.save.toLocaleString()}원</span></div>` : '',
+    p.disc > 0 ? `<div class="perf-row" style="margin-bottom:7px;"><span style="color:var(--text3);">할인금액 총액</span><span style="font-family:'DM Mono',monospace;color:#d29922;">${p.disc.toLocaleString()}원</span></div>` : '',
+  ].join('');
   return `<div class="perf-card">
     <div class="perf-name"><span class="bd ${p.cls}">${p.name}</span></div>
     <div class="perf-row"><span>현재 사용총액</span><span>${p.total.toLocaleString()}원</span></div>
+    <div style="border-bottom:1px solid rgba(38,48,71,.5);padding-bottom:0;margin-bottom:7px;">${benefitRows}</div>
     <div class="perf-row"><span>실적인정 금액</span><span>${p.achieved.toLocaleString()}원</span></div>
     <div class="perf-row"><span>목표 금액</span><span>${p.target.toLocaleString()}원</span></div>
     <div class="perf-row"><span>잔여 금액</span><span>${Math.max(p.target-p.achieved,0).toLocaleString()}원</span></div>
