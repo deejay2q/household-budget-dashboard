@@ -198,7 +198,9 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   .combo-wrap{padding:12px 12px 0;margin-bottom:16px;border-radius:10px;}
   .combo-meta{gap:14px;padding:8px 0 12px;flex-wrap:wrap;}
   .combo-meta-item{font-size:.7rem;}
-  .combo-scroll-outer::after{content:'← 스크롤하여 전체 확인';display:block;font-size:.65rem;color:var(--text3);text-align:right;padding:4px 2px 0;}
+  /* 모바일: 데스크탑 차트 숨기고 모바일 전용 차트 표시 */
+  .desktop-chart{display:none!important;}
+  .mobile-chart{display:block!important;}
   .tbl{font-size:.74rem;}
   .tbl th{padding:7px 8px;font-size:.62rem;}
   .tbl td{padding:7px 8px;}
@@ -309,10 +311,15 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <!-- ③ 일별 지출 현황 복합 차트 -->
   <div class="combo-wrap">
     <div class="panel-hd"><div class="sec-title">일별 지출 현황 (막대: 당일 사용액 / 선: 누적 사용액)</div></div>
-    <div class="combo-scroll-outer">
+    <!-- 데스크탑: 31일 전체 가로 스크롤 -->
+    <div class="combo-scroll-outer desktop-chart">
       <div class="combo-inner">
         <canvas id="dailyComboChart" height="130"></canvas>
       </div>
+    </div>
+    <!-- 모바일: 데이터 있는 날만 표시, 레이블 없이 깔끔하게 -->
+    <div class="mobile-chart" style="display:none;">
+      <canvas id="dailyComboChartMobile"></canvas>
     </div>
     <div class="combo-meta">
       <div class="combo-meta-item"><div class="combo-meta-dot" style="background:rgba(88,166,255,.7);"></div><span>당일 사용액 (막대)</span></div>
@@ -666,7 +673,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 <script>
 // ═══════════════════════════════════════════════════════════
-// 일별 복합 차트 (3월 전체 31일)
+// 일별 복합 차트
 // ═══════════════════════════════════════════════════════════
 (function(){
   const DAYS=31, DOW=['일','월','화','수','목','금','토'];
@@ -684,6 +691,42 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   }
   const yMax=600000;
 
+  // ── 공통 플러그인 ──────────────────────────────────────
+  const cumLabelPlugin={id:'cum-labels',afterDatasetsDraw(chart){
+    const ctx=chart.ctx,ds=chart.data.datasets[1],meta=chart.getDatasetMeta(1);
+    const isMobile=chart.canvas.id==='dailyComboChartMobile';
+    meta.data.forEach((el,i)=>{
+      const v=ds.data[i]; if(v===null)return;
+      ctx.save();
+      ctx.fillStyle='#3fb950';
+      ctx.font=`700 ${isMobile?'10':'11'}px "DM Mono",monospace`;
+      ctx.textAlign='center';
+      ctx.fillText((isMobile?(v/10000).toFixed(1)+'만':v.toLocaleString()+'원'),el.x,el.y-12);
+      ctx.restore();
+    });
+  }};
+
+  const dailyLabelPlugin={id:'daily-axis-labels',afterDraw(chart){
+    // 데스크탑 전용 (X축 하단 레이블)
+    if(chart.canvas.id==='dailyComboChartMobile') return;
+    const ctx=chart.ctx,xAxis=chart.scales.x,tickBottom=chart.chartArea.bottom+48;
+    xAxis.ticks.forEach((tick,i)=>{
+      const v=rawDaily[i]; if(!v)return;
+      const xPos=xAxis.getPixelForTick(i);
+      ctx.save();ctx.translate(xPos,tickBottom);ctx.rotate(-Math.PI/4);
+      ctx.fillStyle='#58a6ff';ctx.font='600 9.5px "DM Mono",monospace';ctx.textAlign='right';
+      ctx.fillText(v.toLocaleString()+'원',0,0);ctx.restore();
+    });
+  }};
+
+  const commonTooltip={backgroundColor:'#1c2333',borderColor:'#263047',borderWidth:1,
+    padding:12,titleColor:'#e6edf3',bodyColor:'#8b949e',
+    callbacks:{
+      label:ctx=>ctx.raw===null?null:` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
+      filter:item=>item.raw!==null
+    }};
+
+  // ── 데스크탑 차트 (31일) ───────────────────────────────
   new Chart(document.getElementById('dailyComboChart'),{
     data:{
       labels,
@@ -710,36 +753,67 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
                   maxRotation:45,minRotation:45,font:{size:10},
                   callback:function(val){return this.getLabelForValue(val);}}}
       },
+      plugins:{legend:{display:false},tooltip:commonTooltip}
+    },
+    plugins:[cumLabelPlugin,dailyLabelPlugin]
+  });
+
+  // ── 모바일 차트 (데이터 있는 날만, 레이블 깔끔) ────────
+  // 데이터 있는 날만 추출
+  const mobileLabels=[], mobileDailyData=[], mobileCumData=[];
+  for(let i=0;i<DAYS;i++){
+    if(rawDaily[i]!==null){
+      mobileLabels.push(`${i+1}일`);
+      mobileDailyData.push(rawDaily[i]);
+      mobileCumData.push(cumAmt[i]);
+    }
+  }
+
+  new Chart(document.getElementById('dailyComboChartMobile'),{
+    data:{
+      labels:mobileLabels,
+      datasets:[
+        {type:'bar',label:'당일 사용액',data:mobileDailyData,
+         backgroundColor:'rgba(88,166,255,.55)',borderColor:'rgba(88,166,255,.8)',
+         borderWidth:1.5,borderRadius:8,borderSkipped:false,order:2,yAxisID:'y'},
+        {type:'line',label:'누적 사용액',data:mobileCumData,
+         borderColor:'#3fb950',borderWidth:2.5,
+         pointBackgroundColor:'#3fb950',pointBorderColor:'#0d1117',pointBorderWidth:2,
+         pointRadius:8,pointHoverRadius:11,
+         tension:0.3,fill:false,order:1,yAxisID:'y'}
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:true,
+      aspectRatio:1.6,
+      layout:{padding:{top:32,right:16,bottom:12,left:4}},
+      interaction:{mode:'index',intersect:false},
+      scales:{
+        y:{
+          min:0,max:yMax,
+          grid:{color:'rgba(38,48,71,.65)'},
+          ticks:{color:'#8b949e',maxTicksLimit:5,callback:v=>v===0?'0':(v/10000)+'만',font:{size:10}}
+        },
+        x:{
+          grid:{color:'rgba(38,48,71,.3)'},
+          ticks:{color:'#8b949e',font:{size:11},maxRotation:0,minRotation:0}
+        }
+      },
       plugins:{
         legend:{display:false},
-        tooltip:{backgroundColor:'#1c2333',borderColor:'#263047',borderWidth:1,
-          padding:12,titleColor:'#e6edf3',bodyColor:'#8b949e',
+        tooltip:{
+          backgroundColor:'#1c2333',borderColor:'#263047',borderWidth:1,
+          padding:14,titleColor:'#e6edf3',bodyColor:'#8b949e',
+          titleFont:{size:13},bodyFont:{size:12},
           callbacks:{
-            label:ctx=>ctx.raw===null?null:` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`,
-            filter:item=>item.raw!==null
-          }}
+            title:ctx=>`3월 ${ctx[0].label}`,
+            label:ctx=>` ${ctx.dataset.label}: ${ctx.raw.toLocaleString()}원`
+          }
+        }
       }
     },
-    plugins:[
-      {id:'cum-labels',afterDatasetsDraw(chart){
-        const ctx=chart.ctx,ds=chart.data.datasets[1],meta=chart.getDatasetMeta(1);
-        meta.data.forEach((el,i)=>{
-          const v=ds.data[i]; if(v===null)return;
-          ctx.save();ctx.fillStyle='#3fb950';ctx.font='700 11px "DM Mono",monospace';
-          ctx.textAlign='center';ctx.fillText(v.toLocaleString()+'원',el.x,el.y-16);ctx.restore();
-        });
-      }},
-      {id:'daily-axis-labels',afterDraw(chart){
-        const ctx=chart.ctx,xAxis=chart.scales.x,tickBottom=chart.chartArea.bottom+48;
-        xAxis.ticks.forEach((tick,i)=>{
-          const v=rawDaily[i]; if(!v)return;
-          const xPos=xAxis.getPixelForTick(i);
-          ctx.save();ctx.translate(xPos,tickBottom);ctx.rotate(-Math.PI/4);
-          ctx.fillStyle='#58a6ff';ctx.font='600 9.5px "DM Mono",monospace';ctx.textAlign='right';
-          ctx.fillText(v.toLocaleString()+'원',0,0);ctx.restore();
-        });
-      }}
-    ]
+    plugins:[cumLabelPlugin]
   });
 })();
 
