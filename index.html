@@ -338,10 +338,11 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="panel-hd"><div class="sec-title">항목별 사용액 (C1 - C2 기준)</div></div>
       <div style="overflow-x:auto;">
       <table class="tbl">
-        <thead><tr><th>C2 항목</th><th class="r">건수</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
+        <thead><tr><th>C1</th><th>C2</th><th class="r">건수</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
         <tbody>
           <!-- 식비 세부 -->
           <tr>
+            <td class="t3" style="font-size:.72rem;">식비</td>
             <td class="t3">식재료</td>
             <td class="r num t3">4</td>
             <td class="r num t2">109,780</td>
@@ -349,6 +350,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
             <td class="r num cy">6,468</td>
           </tr>
           <tr>
+            <td class="t3" style="font-size:.72rem;">식비</td>
             <td class="t3">외식비</td>
             <td class="r num t3">12</td>
             <td class="r num t2">186,173</td>
@@ -392,6 +394,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           </tr>
           <!-- 사회생활비 세부 -->
           <tr>
+            <td class="t3" style="font-size:.72rem;">사회생활비</td>
             <td class="t3">지인모임</td>
             <td class="r num t3">1</td>
             <td class="r num t2">100,000</td>
@@ -399,6 +402,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
             <td class="r num cy">5,000</td>
           </tr>
           <tr>
+            <td class="t3" style="font-size:.72rem;">사회생활비</td>
             <td class="t3">회사모임</td>
             <td class="r num t3">1</td>
             <td class="r num t2">7,600</td>
@@ -413,27 +417,22 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
             <td class="r num cg">600</td>
             <td class="r num cy">5,000</td>
           </tr>
-          <!-- 꾸밈비·문화생활비 세부 -->
-          <tr>
+          <!-- 꾸밈비 -->
+          <tr class="subtot-p">
+            <td><span class="bd bd-p">꾸밈비</span></td>
             <td class="t3">화장품</td>
-            <td class="r num t3">1</td>
-            <td class="r num t2">27,900</td>
+            <td class="r num" style="color:var(--orange);">1</td>
+            <td class="r num cb">27,900</td>
             <td class="r num cg">900</td>
             <td class="r num t3">-</td>
           </tr>
-          <tr>
-            <td class="t3">취미생활</td>
-            <td class="r num t3">2</td>
-            <td class="r num t2">21,000</td>
-            <td class="r num cg">100</td>
-            <td class="r num cy">800</td>
-          </tr>
+          <!-- 문화생활비 -->
           <tr class="subtot-p">
-            <td><span class="bd bd-p">꾸밈비·문화생활비</span> <span style="font-size:.67rem;color:var(--text3);font-weight:600;">소계</span></td>
-            <td></td>
-            <td class="r num" style="color:var(--orange);">3</td>
-            <td class="r num cb">48,900</td>
-            <td class="r num cg">1,000</td>
+            <td><span class="bd bd-p">문화생활비</span></td>
+            <td class="t3">취미생활</td>
+            <td class="r num" style="color:var(--orange);">2</td>
+            <td class="r num cb">21,000</td>
+            <td class="r num cg">100</td>
             <td class="r num cy">800</td>
           </tr>
           <!-- 생활비 -->
@@ -1018,9 +1017,9 @@ const tip={backgroundColor:'#1c2333',borderColor:'#263047',borderWidth:1,
 
 const TOTAL=597531;
 // 항목별
-const catLabels=['식비-식재료','식비-외식비','교통비-유류비','보험료-연금보험료','사회생활비','꾸밈비·문화생활비','통신비·생활비','부전페이'];
-const catVals  =[109780,245173,93396,23212,107600,43900,28470,72500];
-const catColors=['#58a6ff','#3fb950','#d29922','#f85149','#ffa657','#bc8cff','#79c0ff','#f0883e'];
+const catLabels=['식비-식재료','식비-외식비','교통비-유류비','보험료-연금보험료','사회생활비','꾸밈비-화장품','문화생활비-취미생활','통신비','생활비'];
+const catVals  =[109780,186173,93396,23212,107600,27900,21000,17970,10500];
+const catColors=['#58a6ff','#3fb950','#d29922','#f85149','#ffa657','#bc8cff','#79c0ff','#f0883e','#56d364'];
 // 카드사별
 const cardLabels=['신한더모아','하나카드SK','롯데카드','신한RPM','부전페이'];
 const cardVals  =[159494,217437,130680,17420,72500];
