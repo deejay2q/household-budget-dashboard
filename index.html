@@ -236,10 +236,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 <div class="header">
   <div>
-    <h1>💰 가계부 대시보드 <span style="font-size:.85rem;font-weight:500;color:var(--text3);-webkit-text-fill-color:var(--text3);background:none;">· 업데이트 2026-03-05</span></h1>
-    <div class="sub">2026년 3월 · 1~2주차 (03/01 ~ 03/05) · 실소비 20건 · 재판매 2건 별도 · 기본항목 제외</div>
+    <h1>💰 가계부 대시보드 <span style="font-size:.85rem;font-weight:500;color:var(--text3);-webkit-text-fill-color:var(--text3);background:none;">· 업데이트 2026-03-07</span></h1>
+    <div class="sub">2026년 3월 · 1~2주차 (03/01 ~ 03/07) · 실소비 29건 · 재판매 2건 별도 · 기본항목 제외</div>
   </div>
-  <div class="date-badge">2026-03-01 ~ 2026-03-05</div>
+  <div class="date-badge">2026-03-01 ~ 2026-03-07</div>
 </div>
 
 <div class="container">
@@ -248,19 +248,19 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   <div class="top-row">
     <div class="scard cb" style="padding-bottom:16px;">
       <div class="scard-lbl">총 소비 지출</div>
-      <div class="scard-val">462,128</div>
-      <div class="scard-sub">실소비 20건 · 기본항목·재판매 제외 · 2026-03-01 ~ 03-05</div>
+      <div class="scard-val">597,531</div>
+      <div class="scard-sub">실소비 29건 · 기본항목·재판매 제외 · 2026-03-01 ~ 03-07</div>
       <div class="budget-progress">
         <div class="budget-row">
           <span class="budget-lbl">월 목표 지출</span>
           <span class="budget-val cb">3,000,000원</span>
         </div>
         <div class="budget-bar-bg">
-          <div class="budget-bar-fill" style="width:15.4%;"></div>
+          <div class="budget-bar-fill" style="width:19.9%;"></div>
         </div>
         <div class="budget-remain-row">
-          <span class="budget-remain-lbl">잔여 예산 <span style="color:var(--text3);font-size:.65rem;">(달성률 15.4%)</span></span>
-          <span class="budget-remain-val">2,537,872원</span>
+          <span class="budget-remain-lbl">잔여 예산 <span style="color:var(--text3);font-size:.65rem;">(달성률 19.9%)</span></span>
+          <span class="budget-remain-val">2,402,469원</span>
         </div>
       </div>
       <!-- 재판매 요약 -->
@@ -271,15 +271,15 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     </div>
     <div class="scard cr" style="padding-bottom:0;">
       <div class="scard-lbl">총 혜택 합계</div>
-      <div class="scard-val">28,227</div>
-      <div class="scard-sub">지출 대비 6.1%</div>
+      <div class="scard-val">34,229</div>
+      <div class="scard-sub">지출 대비 5.7%</div>
       <div class="benefit-ladder">
         <div class="ladder-item">
           <div class="ladder-branch"></div>
           <div class="ladder-content">
             <div class="ladder-lbl">총 적립혜택</div>
-            <div class="ladder-val cg">9,839</div>
-            <div class="ladder-sub">신한더모아 9,591 · 신한RPM 248</div>
+            <div class="ladder-val cg">15,841</div>
+            <div class="ladder-sub">신한더모아 15,493 · 신한RPM 348</div>
           </div>
         </div>
         <div class="ladder-item last">
@@ -301,8 +301,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="perf-grid" id="perfGrid"></div>
       <div class="notice">
         ⚠️ <strong>실적 기준:</strong> 신한더모아 30만원 · 하나카드SK 20만원 · 신한RPM 150만원 · 롯데카드 30만원<br>
-        ※ 하나카드SK: No.10(유카스 87,397) · No.17(이마트 75,690) 실적=0 → 미인정. 실적인정: No.14(26,300)+No.16(28,050)=54,350원<br>
-        ※ 롯데카드: No.12(쿠팡 14,680) 실적=0, No.4(준섭이네 100,000) 실적=0 → 실적인정: No.9(부전FC 16,000)만 인정<br>
+        ※ 하나카드SK: No.19(유카스 87,397) · No.26(이마트 75,690) 실적=0 → 미인정. 실적인정: No.23(26,300)+No.25(28,050)=54,350원<br>
+        ※ 롯데카드: No.21(쿠팡 14,680) 실적=0, No.13(준섭이네 100,000) 실적=0 → 실적인정: No.18(부전FC 16,000)만 인정<br>
         ※ 재판매 및 기본항목(상세명 '기본'·금액 1,000원)은 소비 집계 및 실적 계산에서 항시 제외
       </div>
     </div>
@@ -335,17 +335,42 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <table class="tbl">
         <thead><tr><th>C1</th><th>C2</th><th class="r">건수</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
         <tbody>
-          <tr><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="r num t3">4</td><td class="r num cb">109,780</td><td class="r num cg">1,238</td><td class="r num cy">6,468</td></tr>
-          <tr><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="r num t3">4</td><td class="r num cb">67,750</td><td class="r num cg">1,400</td><td class="r num t3">-</td></tr>
-          <tr><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="r num t3">2</td><td class="r num cb">93,396</td><td class="r num cg">999</td><td class="r num cy">6,120</td></tr>
-          <tr><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="r num t3">4</td><td class="r num cb">23,212</td><td class="r num cg">3,212</td><td class="r num t3">-</td></tr>
-          <tr><td><span class="bd bd-g">사회생활비</span></td><td class="t2">지인모임</td><td class="r num t3">1</td><td class="r num cb">100,000</td><td class="r num t3">-</td><td class="r num cy">5,000</td></tr>
-          <tr><td><span class="bd bd-g">사회생활비</span></td><td class="t2">회사모임</td><td class="r num t3">1</td><td class="r num cb">7,600</td><td class="r num cg">600</td><td class="r num t3">-</td></tr>
-          <tr><td><span class="bd bd-p">꾸밈비</span></td><td class="t2">화장품</td><td class="r num t3">1</td><td class="r num cb">27,900</td><td class="r num cg">900</td><td class="r num t3">-</td></tr>
-          <tr><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="r num t3">1</td><td class="r num cb">16,000</td><td class="r num t3">-</td><td class="r num cy">800</td></tr>
-          <tr><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="r num t3">1</td><td class="r num cb">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td></tr>
-          <tr><td><span class="bd bd-g">생활비</span></td><td class="t2">생필품</td><td class="r num t3">1</td><td class="r num cb">10,500</td><td class="r num cg">500</td><td class="r num t3">-</td></tr>
-          <tr class="tot"><td colspan="2">합계</td><td class="r num">20</td><td class="r num cb">462,128</td><td class="r num cg">9,839</td><td class="r num cy">18,388</td></tr>
+          <!-- 03/07 -->
+          <tr><td class="c t3 num">1</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="t2" style="font-size:.72rem;">SKB 요금납부 일부 1/3</td><td>신한더모아</td><td class="r num">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">16.5%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">2</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="t2" style="font-size:.72rem;">SKT 요금납부 일부 2/5</td><td>신한더모아</td><td class="r num">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">16.5%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">3</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">원조맛집 아구찜</td><td>부전페이</td><td class="r num">59,229</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">4</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">세븐일레븐 김밥 음료</td><td>신한더모아</td><td class="r num">5,400</td><td class="r num cg">400</td><td class="r num t3">-</td><td class="r t3">7.4%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/06 -->
+          <tr><td class="c t3 num">5</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">요기요 호식이2마리 치킨 주문</td><td>신한더모아</td><td class="r num">24,999</td><td class="r num cg">1,998</td><td class="r num t3">-</td><td class="r t3">8.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">6</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">CU 편의점 맥주</td><td>신한더모아</td><td class="r num">5,800</td><td class="r num cg">800</td><td class="r num t3">-</td><td class="r t3">13.8%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">7</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="t2" style="font-size:.72rem;">포토이즘 사진촬영</td><td>신한RPM</td><td class="r num">5,000</td><td class="r num cg">100</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">8</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신룡후 마라탕</td><td>부전페이</td><td class="r num">13,271</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">9</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신룡후 마라탕</td><td>신한더모아</td><td class="r num">9,724</td><td class="r num cg">724</td><td class="r num t3">-</td><td class="r t3">7.4%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/05 -->
+          <tr><td class="c t3 num">10</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="t2" style="font-size:.72rem;">SKT 요금납부 일부 1/5</td><td>신한더모아</td><td class="r num">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">16.5%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">11</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-g">생활비</span></td><td class="t2">생필품</td><td class="t2" style="font-size:.72rem;">다이소, 민준이 생일파티 준비</td><td>신한더모아</td><td class="r num">10,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">4.8%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">12</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">송내역 핫브레드</td><td>신한더모아</td><td class="r num">6,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">13.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/04 -->
+          <tr class="hl-r"><td class="c t3 num">13</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">지인모임</td><td class="t2" style="font-size:.72rem;">준섭이네 플짜팔 입학선물</td><td>롯데카드</td><td class="r num">100,000</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">14</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">회사모임</td><td class="t2" style="font-size:.72rem;">컴퍼우즈 커피</td><td>신한더모아</td><td class="r num">7,600</td><td class="r num cg">600</td><td class="r num t3">-</td><td class="r t3">7.9%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">15</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 8회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,221</td><td class="r num cg">221</td><td class="r num t3">-</td><td class="r t3">4.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/03 -->
+          <tr class="hl-y"><td class="c t3 num">16</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 7회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">17</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">꾸밈비</span></td><td class="t2">화장품</td><td class="t2" style="font-size:.72rem;">올리브영</td><td>신한더모아</td><td class="r num">27,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">3.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">18</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="t2" style="font-size:.72rem;">부전FC 축구 입장권 예매</td><td>롯데카드</td><td class="r num">16,000</td><td class="r num t3">-</td><td class="r num cy">800</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/02 -->
+          <tr class="hl-y"><td class="c t3 num">19</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>하나카드SK</td><td class="r num">87,397</td><td class="r num t3">-</td><td class="r num cy">6,120</td><td class="r t3">7.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">20</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>신한더모아</td><td class="r num">5,999</td><td class="r num cg">999</td><td class="r num t3">-</td><td class="r t3">16.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">21</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">쿠팡 프레시</td><td>롯데카드</td><td class="r num">14,680</td><td class="r num t3">-</td><td class="r num cy">1,468</td><td class="r t3">10.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">22</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>신한더모아</td><td class="r num">6,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">7.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">23</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>하나카드SK</td><td class="r num">26,300</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">24</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 6회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">25</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">도미노피자</td><td>하나카드SK</td><td class="r num">28,050</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/01 -->
+          <tr class="hl-r"><td class="c t3 num">26</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>하나카드SK</td><td class="r num">75,690</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">6.6%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">27</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점 (삼겹살 국산)</td><td>신한RPM</td><td class="r num">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">28</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>신한더모아</td><td class="r num">6,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">14.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">29</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
         </tbody>
       </table>
       </div>
@@ -356,11 +381,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <table class="tbl">
         <thead><tr><th>카드</th><th class="r">건수</th><th class="c">실적인정</th><th class="r">금액</th><th class="r">적립</th><th class="r">할인</th></tr></thead>
         <tbody>
-          <tr><td><span class="bd bd-b">신한더모아</span></td><td class="r num t3">12</td><td class="c"><span class="bd bd-g">12건</span></td><td class="r num cb">101,591</td><td class="r num cg">9,591</td><td class="r num t3">-</td></tr>
+          <tr><td><span class="bd bd-b">신한더모아</span></td><td class="r num t3">18</td><td class="c"><span class="bd bd-g">18건</span></td><td class="r num cb">159,494</td><td class="r num cg">15,493</td><td class="r num t3">-</td></tr>
           <tr><td><span class="bd bd-g">하나카드SK</span></td><td class="r num t3">4</td><td class="c"><span class="bd bd-r">2건</span></td><td class="r num cb">217,437</td><td class="r num t3">-</td><td class="r num cy">11,120</td></tr>
           <tr><td><span class="bd bd-r">롯데카드</span></td><td class="r num t3">3</td><td class="c"><span class="bd bd-r">1건</span></td><td class="r num cb">130,680</td><td class="r num t3">-</td><td class="r num cy">7,268</td></tr>
-          <tr><td><span class="bd bd-p">신한RPM</span></td><td class="r num t3">1</td><td class="c"><span class="bd bd-g">1건</span></td><td class="r num cb">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td></tr>
-          <tr class="tot"><td>합계</td><td class="r num">20</td><td class="c">16건</td><td class="r num cb">462,128</td><td class="r num cg">9,839</td><td class="r num cy">18,388</td></tr>
+          <tr><td><span class="bd bd-p">신한RPM</span></td><td class="r num t3">2</td><td class="c"><span class="bd bd-g">2건</span></td><td class="r num cb">17,420</td><td class="r num cg">348</td><td class="r num t3">-</td></tr>
+          <tr><td><span class="bd bd-y">부전페이</span></td><td class="r num t3">2</td><td class="c"><span class="bd bd-r">0건</span></td><td class="r num cb">72,500</td><td class="r num t3">-</td><td class="r num t3">-</td></tr>
+          <tr class="tot"><td>합계</td><td class="r num">29</td><td class="c">23건</td><td class="r num cb">597,531</td><td class="r num cg">15,841</td><td class="r num cy">18,388</td></tr>
           <!-- 재판매 -->
           <tr><td colspan="6" style="padding:0;border-bottom:none;">
             <div style="display:flex;align-items:center;gap:8px;padding:10px 11px 6px;">
@@ -389,23 +415,31 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <div class="panel-hd"><div class="sec-title">적립혜택 상세</div></div>
       <div style="overflow-x:auto;">
       <table class="tbl">
-        <thead><tr><th style="white-space:nowrap">카드</th><th>사용처</th><th class="r" style="white-space:nowrap">적립액</th></tr></thead>
+                <thead><tr><th style="white-space:nowrap">카드</th><th>사용처</th><th class="r" style="white-space:nowrap">적립액</th></tr></thead>
         <tbody>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">SKT 요금납부(No.1)</td><td class="r num cg">990</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">다이소 생필품(No.2)</td><td class="r num cg">500</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">송내역 핫브레드(No.3)</td><td class="r num cg">900</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">컴퍼우즈커피(No.5)</td><td class="r num cg">600</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 8회(No.6)</td><td class="r num cg">221</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 7회(No.7)</td><td class="r num cg">997</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">올리브영(No.8)</td><td class="r num cg">900</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.11)</td><td class="r num cg">999</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">폴바셋(No.13)</td><td class="r num cg">500</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 6회(No.15)</td><td class="r num cg">997</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">이마트(No.19)</td><td class="r num cg">990</td></tr>
-          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 5회(No.20)</td><td class="r num cg">997</td></tr>
-          <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap" colspan="2">신한더모아 소계</td><td class="r num" style="color:#e6edf3;">9,591</td></tr>
-          <tr><td style="white-space:nowrap">신한RPM</td><td class="t3" style="font-size:.71rem;">이마트삼겹살(No.18)</td><td class="r num cg">248</td></tr>
-          <tr class="tot"><td colspan="2">합계</td><td class="r num" style="color:#56d364;font-size:.9rem;">9,839</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">SKB 요금납부(No.1)</td><td class="r num cg">990</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">SKT 요금납부 2/5(No.2)</td><td class="r num cg">990</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">세븐일레븐(No.4)</td><td class="r num cg">400</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">호식이2마리치킨(No.5)</td><td class="r num cg">1,998</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">CU 편의점(No.6)</td><td class="r num cg">800</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">신룡후 마라탕(No.9)</td><td class="r num cg">724</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">SKT 요금납부 1/5(No.10)</td><td class="r num cg">990</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">다이소 생필품(No.11)</td><td class="r num cg">500</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">송내역 핫브레드(No.12)</td><td class="r num cg">900</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">컴퍼우즈커피(No.14)</td><td class="r num cg">600</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 8회(No.15)</td><td class="r num cg">221</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 7회(No.16)</td><td class="r num cg">997</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">올리브영(No.17)</td><td class="r num cg">900</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.20)</td><td class="r num cg">999</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">폴바셋(No.22)</td><td class="r num cg">500</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 6회(No.24)</td><td class="r num cg">997</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">이마트(No.28)</td><td class="r num cg">990</td></tr>
+          <tr><td style="white-space:nowrap">신한더모아</td><td class="t3" style="font-size:.71rem;">연금보험료 5회(No.29)</td><td class="r num cg">997</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap" colspan="2">신한더모아 소계</td><td class="r num" style="color:#e6edf3;">15,493</td></tr>
+          <tr><td style="white-space:nowrap">신한RPM</td><td class="t3" style="font-size:.71rem;">포토이즘(No.7)</td><td class="r num cg">100</td></tr>
+          <tr><td style="white-space:nowrap">신한RPM</td><td class="t3" style="font-size:.71rem;">이마트삼겹살(No.27)</td><td class="r num cg">248</td></tr>
+          <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap" colspan="2">신한RPM 소계</td><td class="r num" style="color:#e6edf3;">348</td></tr>
+          <tr class="tot"><td colspan="2">합계</td><td class="r num" style="color:#56d364;font-size:.9rem;">15,841</td></tr>
         </tbody>
       </table>
       </div>
@@ -416,12 +450,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <table class="tbl">
         <thead><tr><th style="white-space:nowrap">카드</th><th>사용처</th><th class="r" style="white-space:nowrap">할인율</th><th class="r" style="white-space:nowrap">할인액</th></tr></thead>
         <tbody>
-          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.10)</td><td class="r num t3">7.0%</td><td class="r num cy">6,120</td></tr>
-          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">이마트(No.17)</td><td class="r num t3">6.6%</td><td class="r num cy">5,000</td></tr>
+          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">유카스에너지(No.19)</td><td class="r num t3">7.0%</td><td class="r num cy">6,120</td></tr>
+          <tr><td style="white-space:nowrap">하나카드SK</td><td class="t3" style="font-size:.71rem;">이마트(No.26)</td><td class="r num t3">6.6%</td><td class="r num cy">5,000</td></tr>
           <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap" colspan="2">하나카드SK 소계</td><td class="r num t3"></td><td class="r num" style="color:#e6edf3;">11,120</td></tr>
-          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">준섭이네(No.4)</td><td class="r num t3">5.0%</td><td class="r num cy">5,000</td></tr>
-          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">쿠팡프레시(No.12)</td><td class="r num t3">10.0%</td><td class="r num cy">1,468</td></tr>
-          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">부전FC(No.9)</td><td class="r num t3">5.0%</td><td class="r num cy">800</td></tr>
+          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">준섭이네(No.13)</td><td class="r num t3">5.0%</td><td class="r num cy">5,000</td></tr>
+          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">쿠팡프레시(No.21)</td><td class="r num t3">10.0%</td><td class="r num cy">1,468</td></tr>
+          <tr><td style="white-space:nowrap">롯데카드</td><td class="t3" style="font-size:.71rem;">부전FC(No.18)</td><td class="r num t3">5.0%</td><td class="r num cy">800</td></tr>
           <tr style="border-top:1px solid var(--border)"><td class="t2" style="white-space:nowrap" colspan="2">롯데카드 소계</td><td class="r num t3"></td><td class="r num" style="color:#e6edf3;">7,268</td></tr>
           <tr class="tot"><td colspan="3">합계</td><td class="r num" style="color:#e3b341;font-size:.9rem;">18,388</td></tr>
         </tbody>
@@ -434,13 +468,13 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
       <table class="tbl">
         <thead><tr><th>구분</th><th>카드</th><th class="r">금액</th><th class="r">비율</th></tr></thead>
         <tbody>
-          <tr><td rowspan="2"><span class="bd bd-g">적립</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">신한더모아</td><td class="r num cg">9,591</td><td class="r t3 num">2.1%</td></tr>
-          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">신한RPM</td><td class="r num cg">248</td><td class="r t3 num">0.1%</td></tr>
-          <tr><td><span class="bd bd-g">적립 소계</span></td><td></td><td class="r num" style="color:#e6edf3;">9,839</td><td class="r t3 num">2.1%</td></tr>
-          <tr><td rowspan="2"><span class="bd bd-y">할인</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">하나카드SK</td><td class="r num cy">11,120</td><td class="r t3 num">2.4%</td></tr>
-          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">롯데카드</td><td class="r num cy">7,268</td><td class="r t3 num">1.6%</td></tr>
-          <tr><td><span class="bd bd-y">할인 소계</span></td><td></td><td class="r num" style="color:#e6edf3;">18,388</td><td class="r t3 num">4.0%</td></tr>
-          <tr class="tot"><td colspan="2" style="white-space:nowrap">최종 합계</td><td class="r num" style="color:#f85149;font-size:.9rem;">28,227</td><td class="r num" style="color:var(--orange);font-size:.9rem;">6.1%</td></tr>
+          <tr><td rowspan="2"><span class="bd bd-g">적립</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">신한더모아</td><td class="r num cg">15,493</td><td class="r t3 num">2.6%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">신한RPM</td><td class="r num cg">348</td><td class="r t3 num">0.1%</td></tr>
+          <tr><td><span class="bd bd-g">적립 소계</span></td><td></td><td class="r num" style="color:#e6edf3;">15,841</td><td class="r t3 num">2.7%</td></tr>
+          <tr><td rowspan="2"><span class="bd bd-y">할인</span></td><td class="t3" style="font-size:.71rem;white-space:nowrap">하나카드SK</td><td class="r num cy">11,120</td><td class="r t3 num">1.9%</td></tr>
+          <tr><td class="t3" style="font-size:.71rem;white-space:nowrap">롯데카드</td><td class="r num cy">7,268</td><td class="r t3 num">1.2%</td></tr>
+          <tr><td><span class="bd bd-y">할인 소계</span></td><td></td><td class="r num" style="color:#e6edf3;">18,388</td><td class="r t3 num">3.1%</td></tr>
+          <tr class="tot"><td colspan="2" style="white-space:nowrap">최종 합계</td><td class="r num" style="color:#f85149;font-size:.9rem;">34,229</td><td class="r num" style="color:var(--orange);font-size:.9rem;">5.7%</td></tr>
         </tbody>
       </table>
       </div>
@@ -531,113 +565,162 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
     <!-- 모바일 카드뷰 -->
     <div class="mobile-cards">
-      <!-- ── 03/05 ── -->
-      <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:6px;letter-spacing:.5px;">03/05 (목) — 23,390원</div>
+      <!-- ── 03/07 ── -->
+      <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:6px;letter-spacing:.5px;">03/07 (토) — 76,609원</div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.1</span><span class="mcard-date">03-05 목</span><span class="bd bd-b">통신비</span><span class="t2 mcard-c2">휴대폰요금</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.1</span><span class="mcard-date">03-07 토</span><span class="bd bd-b">통신비</span><span class="t2 mcard-c2">휴대폰요금</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">SKB 요금납부 일부 1/3</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,990원</span><span class="cg num mcard-disc">적립 990</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.2</span><span class="mcard-date">03-07 토</span><span class="bd bd-b">통신비</span><span class="t2 mcard-c2">휴대폰요금</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">SKT 요금납부 일부 2/5</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,990원</span><span class="cg num mcard-disc">적립 990</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.3</span><span class="mcard-date">03-07 토</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">원조맛집 아구찜</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">부전페이</span><span class="mcard-amt num">59,229원</span><span class="t3 num mcard-disc">혜택없음</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.4</span><span class="mcard-date">03-07 토</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">세븐일레븐 김밥 음료</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,400원</span><span class="cg num mcard-disc">적립 400</span></div>
+      </div>
+      <!-- ── 03/06 ── -->
+      <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/06 (금) — 58,794원</div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.5</span><span class="mcard-date">03-06 금</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">요기요 호식이2마리 치킨 주문</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">24,999원</span><span class="cg num mcard-disc">적립 1,998</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.6</span><span class="mcard-date">03-06 금</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">CU 편의점 맥주</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,800원</span><span class="cg num mcard-disc">적립 800</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.7</span><span class="mcard-date">03-06 금</span><span class="bd bd-p">문화생활비</span><span class="t2 mcard-c2">취미생활</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">포토이즘 사진촬영</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한RPM</span><span class="mcard-amt num">5,000원</span><span class="cg num mcard-disc">적립 100</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.8</span><span class="mcard-date">03-06 금</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">신룡후 마라탕</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">부전페이</span><span class="mcard-amt num">13,271원</span><span class="t3 num mcard-disc">혜택없음</span></div>
+      </div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.9</span><span class="mcard-date">03-06 금</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-place">신룡후 마라탕</div>
+        <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">9,724원</span><span class="cg num mcard-disc">적립 724</span></div>
+      </div>
+      <!-- ── 03/05 ── -->
+      <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/05 (목) — 23,390원</div>
+      <div class="mcard">
+        <div class="mcard-top"><span class="mcard-no t3">No.10</span><span class="mcard-date">03-05 목</span><span class="bd bd-b">통신비</span><span class="t2 mcard-c2">휴대폰요금</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">SKT 요금납부 일부 1/5</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,990원</span><span class="cg num mcard-disc">적립 990</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.2</span><span class="mcard-date">03-05 목</span><span class="bd bd-g">생활비</span><span class="t2 mcard-c2">생필품</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.11</span><span class="mcard-date">03-05 목</span><span class="bd bd-g">생활비</span><span class="t2 mcard-c2">생필품</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">다이소, 민준이 생일파티 준비</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">10,500원</span><span class="cg num mcard-disc">적립 500</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.3</span><span class="mcard-date">03-05 목</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.12</span><span class="mcard-date">03-05 목</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">송내역 핫브레드</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">6,900원</span><span class="cg num mcard-disc">적립 900</span></div>
       </div>
       <!-- ── 03/04 ── -->
       <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/04 (수) — 112,821원</div>
       <div class="mcard hl-r-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.4</span><span class="mcard-date">03-04 수</span><span class="bd bd-g">사회생활비</span><span class="t2 mcard-c2">지인모임</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.13</span><span class="mcard-date">03-04 수</span><span class="bd bd-g">사회생활비</span><span class="t2 mcard-c2">지인모임</span><span class="bd bd-r mcard-result">✗</span></div>
         <div class="mcard-place">준섭이네 플짜팔 입학선물</div>
         <div class="mcard-bottom"><span class="mcard-card t3">롯데카드</span><span class="mcard-amt num">100,000원</span><span class="cy num mcard-disc">할인 5,000</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.5</span><span class="mcard-date">03-04 수</span><span class="bd bd-g">사회생활비</span><span class="t2 mcard-c2">회사모임</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.14</span><span class="mcard-date">03-04 수</span><span class="bd bd-g">사회생활비</span><span class="t2 mcard-c2">회사모임</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">컴퍼우즈 커피</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">7,600원</span><span class="cg num mcard-disc">적립 600</span></div>
       </div>
       <div class="mcard hl-y-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.6</span><span class="mcard-date">03-04 수</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.15</span><span class="mcard-date">03-04 수</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">연금보험료 3월분 8회 완납</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,221원</span><span class="cg num mcard-disc">적립 221</span></div>
       </div>
       <!-- ── 03/03 ── -->
       <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/03 (화) — 49,897원</div>
       <div class="mcard hl-y-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.7</span><span class="mcard-date">03-03 화</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.16</span><span class="mcard-date">03-03 화</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">연금보험료 3월분 7회 완납</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,997원</span><span class="cg num mcard-disc">적립 997</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.8</span><span class="mcard-date">03-03 화</span><span class="bd bd-p">꾸밈비</span><span class="t2 mcard-c2">화장품</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.17</span><span class="mcard-date">03-03 화</span><span class="bd bd-p">꾸밈비</span><span class="t2 mcard-c2">화장품</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">올리브영</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">27,900원</span><span class="cg num mcard-disc">적립 900</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.9</span><span class="mcard-date">03-03 화</span><span class="bd bd-p">문화생활비</span><span class="t2 mcard-c2">취미생활</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.18</span><span class="mcard-date">03-03 화</span><span class="bd bd-p">문화생활비</span><span class="t2 mcard-c2">취미생활</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">부전FC 축구 입장권</div>
         <div class="mcard-bottom"><span class="mcard-card t3">롯데카드</span><span class="mcard-amt num">16,000원</span><span class="cy num mcard-disc">할인 800</span></div>
       </div>
       <!-- ── 03/02 ── -->
       <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/02 (월) — 174,923원</div>
       <div class="mcard hl-y-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.10</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.19</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-r mcard-result">✗</span></div>
         <div class="mcard-place">유카스에너지</div>
         <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">87,397원</span><span class="cy num mcard-disc">할인 6,120</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.11</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.20</span><span class="mcard-date">03-02 월</span><span class="bd bd-y">교통비</span><span class="t2 mcard-c2">유류비</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">유카스에너지</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,999원</span><span class="cg num mcard-disc">적립 999</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.12</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.21</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
         <div class="mcard-place">쿠팡 프레시</div>
         <div class="mcard-bottom"><span class="mcard-card t3">롯데카드</span><span class="mcard-amt num">14,680원</span><span class="cy num mcard-disc">할인 1,468</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.13</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.22</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">폴바셋 (신세계 시흥)</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">6,500원</span><span class="cg num mcard-disc">적립 500</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.14</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.23</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">폴바셋 (신세계 시흥)</div>
         <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">26,300원</span><span class="t3 num mcard-disc">혜택없음</span></div>
       </div>
       <div class="mcard hl-y-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.15</span><span class="mcard-date">03-02 월</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.24</span><span class="mcard-date">03-02 월</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">연금보험료 3월분 6회 완납</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,997원</span><span class="cg num mcard-disc">적립 997</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.16</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.25</span><span class="mcard-date">03-02 월</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">외식비</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">도미노피자</div>
         <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">28,050원</span><span class="t3 num mcard-disc">혜택없음</span></div>
       </div>
       <!-- ── 03/01 ── -->
       <div style="font-size:.68rem;color:var(--text3);font-weight:700;padding:4px 4px 6px;margin-top:10px;letter-spacing:.5px;">03/01 (일) — 101,097원</div>
       <div class="mcard hl-r-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.17</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.26</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-r mcard-result">✗</span></div>
         <div class="mcard-place">이마트 중동점</div>
         <div class="mcard-bottom"><span class="mcard-card t3">하나카드SK</span><span class="mcard-amt num">75,690원</span><span class="cy num mcard-disc">할인 5,000</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.18</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.27</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">이마트 중동점 (삼겹살)</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한RPM</span><span class="mcard-amt num">12,420원</span><span class="cg num mcard-disc">적립 248</span></div>
       </div>
       <div class="mcard">
-        <div class="mcard-top"><span class="mcard-no t3">No.19</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.28</span><span class="mcard-date">03-01 일</span><span class="bd bd-b">식비</span><span class="t2 mcard-c2">식재료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">이마트 중동점</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">6,990원</span><span class="cg num mcard-disc">적립 990</span></div>
       </div>
       <div class="mcard hl-y-m">
-        <div class="mcard-top"><span class="mcard-no t3">No.20</span><span class="mcard-date">03-01 일</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
+        <div class="mcard-top"><span class="mcard-no t3">No.29</span><span class="mcard-date">03-01 일</span><span class="bd bd-r">보험료</span><span class="t2 mcard-c2">연금보험료</span><span class="bd bd-g mcard-result">✓</span></div>
         <div class="mcard-place">연금보험료 3월분 5회 완납</div>
         <div class="mcard-bottom"><span class="mcard-card t3">신한더모아</span><span class="mcard-amt num">5,997원</span><span class="cg num mcard-disc">적립 997</span></div>
       </div>
@@ -653,31 +736,40 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <th class="r">할인율</th><th class="c">실적</th>
         </tr></thead>
         <tbody>
+          <!-- 03/07 -->
+          <tr><td class="c t3 num">1</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">원조맛집 아구찜</td><td>부전페이</td><td class="r num">59,229</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">2</td><td>03-07</td><td class="c">토</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">세븐일레븐 김밥 음료</td><td>신한더모아</td><td class="r num">5,400</td><td class="r num cg">400</td><td class="r num t3">-</td><td class="r t3">7.4%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <!-- 03/06 -->
+          <tr><td class="c t3 num">3</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">요기요 호식이2마리 치킨 주문</td><td>신한더모아</td><td class="r num">24,999</td><td class="r num cg">1,998</td><td class="r num t3">-</td><td class="r t3">8.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">4</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">CU 편의점 맥주</td><td>신한더모아</td><td class="r num">5,800</td><td class="r num cg">800</td><td class="r num t3">-</td><td class="r t3">13.8%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">5</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="t2" style="font-size:.72rem;">포토이즘 사진촬영</td><td>신한RPM</td><td class="r num">5,000</td><td class="r num cg">100</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">6</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신룡후 마라탕</td><td>부전페이</td><td class="r num">13,271</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">7</td><td>03-06</td><td class="c">금</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">신룡후 마라탕</td><td>신한더모아</td><td class="r num">9,724</td><td class="r num cg">724</td><td class="r num t3">-</td><td class="r t3">7.4%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
           <!-- 03/05 -->
-          <tr><td class="c t3 num">1</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="t2" style="font-size:.72rem;">SKT 요금납부 일부 1/5</td><td>신한더모아</td><td class="r num">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">16.5%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">2</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-g">생활비</span></td><td class="t2">생필품</td><td class="t2" style="font-size:.72rem;">다이소, 민준이 생일파티 준비</td><td>신한더모아</td><td class="r num">10,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">4.8%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">3</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">송내역 핫브레드</td><td>신한더모아</td><td class="r num">6,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">13.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">8</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">통신비</span></td><td class="t2">휴대폰요금</td><td class="t2" style="font-size:.72rem;">SKT 요금납부 일부 1/5</td><td>신한더모아</td><td class="r num">5,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">16.5%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">9</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-g">생활비</span></td><td class="t2">생필품</td><td class="t2" style="font-size:.72rem;">다이소, 민준이 생일파티 준비</td><td>신한더모아</td><td class="r num">10,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">4.8%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">10</td><td>03-05</td><td class="c">목</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">송내역 핫브레드</td><td>신한더모아</td><td class="r num">6,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">13.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
           <!-- 03/04 -->
-          <tr class="hl-r"><td class="c t3 num">4</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">지인모임</td><td class="t2" style="font-size:.72rem;">준섭이네 플짜팔 입학선물</td><td>롯데카드</td><td class="r num">100,000</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
-          <tr><td class="c t3 num">5</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">회사모임</td><td class="t2" style="font-size:.72rem;">컴퍼우즈 커피</td><td>신한더모아</td><td class="r num">7,600</td><td class="r num cg">600</td><td class="r num t3">-</td><td class="r t3">7.9%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr class="hl-y"><td class="c t3 num">6</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 8회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,221</td><td class="r num cg">221</td><td class="r num t3">-</td><td class="r t3">4.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-r"><td class="c t3 num">11</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">지인모임</td><td class="t2" style="font-size:.72rem;">준섭이네 플짜팔 입학선물</td><td>롯데카드</td><td class="r num">100,000</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">12</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-g">사회생활비</span></td><td class="t2">회사모임</td><td class="t2" style="font-size:.72rem;">컴퍼우즈 커피</td><td>신한더모아</td><td class="r num">7,600</td><td class="r num cg">600</td><td class="r num t3">-</td><td class="r t3">7.9%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">13</td><td>03-04</td><td class="c">수</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 8회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,221</td><td class="r num cg">221</td><td class="r num t3">-</td><td class="r t3">4.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
           <!-- 03/03 -->
-          <tr class="hl-y"><td class="c t3 num">7</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 7회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">8</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">꾸밈비</span></td><td class="t2">화장품</td><td class="t2" style="font-size:.72rem;">올리브영</td><td>신한더모아</td><td class="r num">27,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">3.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">9</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="t2" style="font-size:.72rem;">부전FC 축구 입장권 예매</td><td>롯데카드</td><td class="r num">16,000</td><td class="r num t3">-</td><td class="r num cy">800</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">14</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 7회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">15</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">꾸밈비</span></td><td class="t2">화장품</td><td class="t2" style="font-size:.72rem;">올리브영</td><td>신한더모아</td><td class="r num">27,900</td><td class="r num cg">900</td><td class="r num t3">-</td><td class="r t3">3.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">16</td><td>03-03</td><td class="c">화</td><td><span class="bd bd-p">문화생활비</span></td><td class="t2">취미생활</td><td class="t2" style="font-size:.72rem;">부전FC 축구 입장권 예매</td><td>롯데카드</td><td class="r num">16,000</td><td class="r num t3">-</td><td class="r num cy">800</td><td class="r t3">5.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
           <!-- 03/02 -->
-          <tr class="hl-y"><td class="c t3 num">10</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>하나카드SK</td><td class="r num">87,397</td><td class="r num t3">-</td><td class="r num cy">6,120</td><td class="r t3">7.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
-          <tr><td class="c t3 num">11</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>신한더모아</td><td class="r num">5,999</td><td class="r num cg">999</td><td class="r num t3">-</td><td class="r t3">16.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">12</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">쿠팡 프레시</td><td>롯데카드</td><td class="r num">14,680</td><td class="r num t3">-</td><td class="r num cy">1,468</td><td class="r t3">10.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
-          <tr><td class="c t3 num">13</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>신한더모아</td><td class="r num">6,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">7.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">14</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>하나카드SK</td><td class="r num">26,300</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr class="hl-y"><td class="c t3 num">15</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 6회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">16</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">도미노피자</td><td>하나카드SK</td><td class="r num">28,050</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">17</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>하나카드SK</td><td class="r num">87,397</td><td class="r num t3">-</td><td class="r num cy">6,120</td><td class="r t3">7.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">18</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-y">교통비</span></td><td class="t2">유류비</td><td class="t2" style="font-size:.72rem;">유카스에너지</td><td>신한더모아</td><td class="r num">5,999</td><td class="r num cg">999</td><td class="r num t3">-</td><td class="r t3">16.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">19</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">쿠팡 프레시</td><td>롯데카드</td><td class="r num">14,680</td><td class="r num t3">-</td><td class="r num cy">1,468</td><td class="r t3">10.0%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">20</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>신한더모아</td><td class="r num">6,500</td><td class="r num cg">500</td><td class="r num t3">-</td><td class="r t3">7.7%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">21</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">폴바셋 (신세계 시흥 아울렛)</td><td>하나카드SK</td><td class="r num">26,300</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">22</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 6회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">23</td><td>03-02</td><td class="c">월</td><td><span class="bd bd-b">식비</span></td><td class="t2">외식비</td><td class="t2" style="font-size:.72rem;">도미노피자</td><td>하나카드SK</td><td class="r num">28,050</td><td class="r num t3">-</td><td class="r num t3">-</td><td class="r t3">0.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
           <!-- 03/01 -->
-          <tr class="hl-r"><td class="c t3 num">17</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>하나카드SK</td><td class="r num">75,690</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">6.6%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
-          <tr><td class="c t3 num">18</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점 (삼겹살 국산)</td><td>신한RPM</td><td class="r num">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr><td class="c t3 num">19</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>신한더모아</td><td class="r num">6,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">14.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
-          <tr class="hl-y"><td class="c t3 num">20</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-r"><td class="c t3 num">24</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>하나카드SK</td><td class="r num">75,690</td><td class="r num t3">-</td><td class="r num cy">5,000</td><td class="r t3">6.6%</td><td class="c"><span class="bd bd-r">✗</span></td></tr>
+          <tr><td class="c t3 num">25</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점 (삼겹살 국산)</td><td>신한RPM</td><td class="r num">12,420</td><td class="r num cg">248</td><td class="r num t3">-</td><td class="r t3">2.0%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr><td class="c t3 num">26</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-b">식비</span></td><td class="t2">식재료</td><td class="t2" style="font-size:.72rem;">이마트 중동점</td><td>신한더모아</td><td class="r num">6,990</td><td class="r num cg">990</td><td class="r num t3">-</td><td class="r t3">14.2%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
+          <tr class="hl-y"><td class="c t3 num">27</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -696,12 +788,12 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     return `03/${String(d).padStart(2,'0')}(${DOW[new Date(2026,2,d).getDay()]})`;
   });
   const rawDaily=new Array(DAYS).fill(null);
-  rawDaily[0]=101097; rawDaily[1]=174923; rawDaily[2]=49897; rawDaily[3]=112821; rawDaily[4]=23390;
+  rawDaily[0]=101097; rawDaily[1]=174923; rawDaily[2]=49897; rawDaily[3]=112821; rawDaily[4]=23390; rawDaily[5]=58794; rawDaily[6]=76609;
   const cumAmt=new Array(DAYS).fill(null);
   let run=0;
   for(let i=0;i<DAYS;i++){
     if(rawDaily[i]!==null) run+=rawDaily[i];
-    if(i<=4) cumAmt[i]=run;
+    if(i<=6) cumAmt[i]=run;
   }
   const yMax=600000;
 
@@ -763,7 +855,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         y:{min:0,max:yMax,grid:{color:'rgba(38,48,71,.65)'},
            ticks:{color:'#8b949e',maxTicksLimit:7,callback:v=>v===0?'0':(v/10000)+'만'}},
         x:{grid:{color:'rgba(38,48,71,.3)'},
-           ticks:{color:ctx=>ctx.index<=4?'#8b949e':'#2e3847',
+           ticks:{color:ctx=>ctx.index<=6?'#8b949e':'#2e3847',
                   maxRotation:45,minRotation:45,font:{size:10},
                   callback:function(val){return this.getLabelForValue(val);}}}
       },
@@ -841,15 +933,15 @@ const tip={backgroundColor:'#1c2333',borderColor:'#263047',borderWidth:1,
   padding:10,titleColor:'#e6edf3',bodyColor:'#8b949e',
   callbacks:{label:ctx=>` ${ctx.raw.toLocaleString()}원`}};
 
-const TOTAL=462128;
-// 항목별 (통신비/생활비 신규 추가, 식비외식비 +6900)
-const catLabels=['식비-식재료','식비-외식비','교통비-유류비','보험료-연금보험료','사회생활비','꾸밈비·문화생활비','통신비·생활비'];
-const catVals  =[109780,67750,93396,23212,107600,43900,16490];
-const catColors=['#58a6ff','#3fb950','#d29922','#f85149','#ffa657','#bc8cff','#79c0ff'];
+const TOTAL=597531;
+// 항목별
+const catLabels=['식비-식재료','식비-외식비','교통비-유류비','보험료-연금보험료','사회생활비','꾸밈비·문화생활비','통신비·생활비','부전페이'];
+const catVals  =[109780,245173,93396,23212,107600,43900,28470,72500];
+const catColors=['#58a6ff','#3fb950','#d29922','#f85149','#ffa657','#bc8cff','#79c0ff','#f0883e'];
 // 카드사별
-const cardLabels=['신한더모아','하나카드SK','롯데카드','신한RPM'];
-const cardVals  =[101591,217437,130680,12420];
-const cardColors=['#58a6ff','#3fb950','#f85149','#ffa657'];
+const cardLabels=['신한더모아','하나카드SK','롯데카드','신한RPM','부전페이'];
+const cardVals  =[159494,217437,130680,17420,72500];
+const cardColors=['#58a6ff','#3fb950','#f85149','#ffa657','#f0883e'];
 
 function buildLegend(id,labels,vals,colors,total){
   const el=document.getElementById(id);
@@ -892,7 +984,7 @@ new Chart(document.getElementById('benefitChart'),{
   data:{
     labels:['식비\n식재료','식비\n외식비','교통비\n유류비','보험료\n연금','사회\n생활비','꾸밈비\n문화','통신비\n생활비'],
     datasets:[
-      {label:'적립혜택',data:[1238,1400,999,3212,600,900,1490],backgroundColor:'rgba(63,185,80,.75)',borderRadius:5},
+      {label:'적립혜택',data:[1238,4422,999,3212,600,1000,3470],backgroundColor:'rgba(63,185,80,.75)',borderRadius:5},
       {label:'할인혜택',data:[6468,0,6120,0,5000,800,0],backgroundColor:'rgba(210,153,34,.75)',borderRadius:5}
     ]
   },
@@ -922,10 +1014,11 @@ new Chart(document.getElementById('cardBarChart'),{
 // 실적 달성
 // ═══════════════════════════════════════════════════════════
 const perfData=[
-  {name:'신한더모아',cls:'bd-b',total:101591,achieved:101591,target:300000, color:'#58a6ff',save:9591,disc:0},
+  {name:'신한더모아',cls:'bd-b',total:159494,achieved:159494,target:300000, color:'#58a6ff',save:15493,disc:0},
   {name:'하나카드SK',cls:'bd-g',total:217437,achieved:54350, target:200000, color:'#3fb950',save:0,   disc:11120},
-  {name:'신한RPM',   cls:'bd-p',total:12420, achieved:12420, target:1500000,color:'#ffa657',save:248, disc:0},
+  {name:'신한RPM',   cls:'bd-p',total:17420, achieved:17420, target:1500000,color:'#ffa657',save:348, disc:0},
   {name:'롯데카드',  cls:'bd-r',total:130680,achieved:16000, target:300000, color:'#f85149',save:0,   disc:7268},
+  {name:'부전페이',  cls:'bd-y',total:72500,  achieved:72500,  target:300000, color:'#d29922',save:0,   disc:0},
 ];
 document.getElementById('perfGrid').innerHTML=perfData.map(p=>{
   const raw=(p.achieved/p.target)*100,pct=Math.min(raw,100);
