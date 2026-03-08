@@ -91,7 +91,8 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 .bd-purple{background:rgba(188,140,255,.15);color:var(--purple)}
 
 /* ── Performance ── */
-.perf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.perf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+/* 2번째 줄 카드(4,5번째)가 자연스럽게 왼쪽 2칸만 차지 */
 .perf-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px 22px;}
 .perf-name{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:13px;}
 .perf-row{display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:7px;}
@@ -185,7 +186,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   .grid2{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
   .grid3{grid-template-columns:1fr;gap:12px;margin-bottom:16px;}
   /* 실적+카드사별 모바일: 세로로 */
-  [style*="grid-template-columns:1fr auto"]{grid-template-columns:1fr!important;}
+  [style*="grid-template-columns:minmax(0,1.15fr)"]{grid-template-columns:1fr!important;}
   .scard{padding:16px 18px;}
   .scard-val{font-size:1.6rem;}
   .budget-remain-val{font-size:.95rem;}
@@ -193,8 +194,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   .ladder-val{font-size:.95rem;}
   .ladder-sub{font-size:.65rem;}
   .perf-grid{grid-template-columns:1fr 1fr;gap:10px;}
-  .perf-card{padding:14px 14px;}
-  .perf-name{font-size:.8rem;margin-bottom:10px;}
+  .perf-card{padding:14px 14px;}  .perf-name{font-size:.8rem;margin-bottom:10px;}
   .perf-row{font-size:.74rem;margin-bottom:5px;}
   .perf-pct{font-size:.85rem;}
   .perf-bar-bg{height:7px;margin:10px 0 5px;}
@@ -302,7 +302,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
   </div>
 
   <!-- ② 카드별 실적 달성 현황 + 카드사별 사용액 -->
-  <div style="display:grid;grid-template-columns:1fr auto;gap:18px;margin-bottom:22px;align-items:start;">
+  <div style="display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px;margin-bottom:22px;align-items:start;">
     <div class="panel">
       <div class="panel-hd"><div class="sec-title">카드별 실적 달성 현황</div></div>
       <div style="padding:14px 17px 17px;">
@@ -315,7 +315,7 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
         </div>
       </div>
     </div>
-    <div class="panel" style="min-width:280px;">
+    <div class="panel">
       <div class="panel-hd"><div class="sec-title">카드사별 사용액</div></div>
       <div style="overflow-x:auto;">
       <table class="tbl">
@@ -1171,10 +1171,10 @@ new Chart(document.getElementById('cardBarChart'),{
           ctx.save();
           ctx.fillStyle = isSub ? '#e6edf3' : '#6e7681';
           ctx.font = isSub
-            ? '700 10.5px "DM Mono",monospace'
+            ? '700 12.5px "DM Mono",monospace'
             : '400 9px "DM Mono",monospace';
           ctx.textAlign = 'left';
-          ctx.fillText(v.toLocaleString() + '원', bar.x + 5, bar.y + 4);
+          ctx.fillText(v.toLocaleString() + '원', bar.x + 7, bar.y + 4);
           ctx.restore();
         });
       });
@@ -1211,7 +1211,7 @@ new Chart(document.getElementById('cardBarChart'),{
           data: subVals,
           backgroundColor: subColors,
           borderRadius: 4,
-          barPercentage: 0.75,
+          barPercentage: 0.92,
           categoryPercentage: 0.85,
         },
         {
@@ -1249,7 +1249,7 @@ new Chart(document.getElementById('cardBarChart'),{
             font: (ctx2) => {
               const idx = ctx2.index;
               return rows[idx].type === 'sub'
-                ? { size: 11, weight: '700', family: '"Pretendard","Noto Sans KR",sans-serif' }
+                ? { size: 12, weight: '700', family: '"Pretendard","Noto Sans KR",sans-serif' }
                 : { size: 9,  weight: '400', family: '"Pretendard","Noto Sans KR",sans-serif' };
             }
           }
