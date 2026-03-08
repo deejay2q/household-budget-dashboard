@@ -163,6 +163,10 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
 
 /* ── Detail table ── */
 .dtbl-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:17px 19px;margin-bottom:22px;}
+.dtbl-scroll::-webkit-scrollbar{width:6px;height:6px;}
+.dtbl-scroll::-webkit-scrollbar-track{background:var(--bg3);border-radius:99px;}
+.dtbl-scroll::-webkit-scrollbar-thumb{background:var(--border);border-radius:99px;}
+.dtbl-scroll::-webkit-scrollbar-thumb:hover{background:#444d5a;}
 .dtbl{width:100%;border-collapse:collapse;font-size:.77rem;}
 .dtbl th{background:var(--bg3);color:var(--text3);font-weight:600;font-size:.66rem;text-transform:uppercase;letter-spacing:.4px;padding:8px 9px;border-bottom:1px solid var(--border);white-space:nowrap;}
 .dtbl th.r{text-align:right}.dtbl th.c{text-align:center}
@@ -839,13 +843,22 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
     </div><!-- /mobile-cards -->
 
     <!-- 데스크탑 테이블뷰 -->
-    <div class="desktop-table" style="overflow-x:auto;">
-      <table class="dtbl">
-        <thead><tr>
-          <th class="c">No</th><th>날짜</th><th class="c">요일</th>
-          <th>C1</th><th>C2</th><th>상세</th><th>사용카드</th>
-          <th class="r">금액</th><th class="r">적립</th><th class="r">할인</th>
-          <th class="r">할인율</th><th class="c">실적</th>
+    <div class="desktop-table">
+      <div class="dtbl-scroll" style="overflow-x:auto;overflow-y:auto;max-height:714px;border-radius:8px;border:1px solid var(--border);">
+      <table class="dtbl" style="border:none;">
+        <thead><tr style="position:sticky;top:0;z-index:2;">
+          <th class="c" style="position:sticky;top:0;background:var(--bg3);">No</th>
+          <th style="position:sticky;top:0;background:var(--bg3);">날짜</th>
+          <th class="c" style="position:sticky;top:0;background:var(--bg3);">요일</th>
+          <th style="position:sticky;top:0;background:var(--bg3);">C1</th>
+          <th style="position:sticky;top:0;background:var(--bg3);">C2</th>
+          <th style="position:sticky;top:0;background:var(--bg3);">상세</th>
+          <th style="position:sticky;top:0;background:var(--bg3);">사용카드</th>
+          <th class="r" style="position:sticky;top:0;background:var(--bg3);">금액</th>
+          <th class="r" style="position:sticky;top:0;background:var(--bg3);">적립</th>
+          <th class="r" style="position:sticky;top:0;background:var(--bg3);">할인</th>
+          <th class="r" style="position:sticky;top:0;background:var(--bg3);">할인율</th>
+          <th class="c" style="position:sticky;top:0;background:var(--bg3);">실적</th>
         </tr></thead>
         <tbody>
           <!-- 03/08 -->
@@ -890,8 +903,9 @@ body{background:var(--bg);color:var(--text);font-family:'Noto Sans KR',sans-seri
           <tr class="hl-y"><td class="c t3 num">32</td><td>03-01</td><td class="c">일</td><td><span class="bd bd-r">보험료</span></td><td class="t2">연금보험료</td><td class="t2" style="font-size:.72rem;">연금보험료 26년 3월분 납부 5회 (건보:174,820 / 연금:44,350) / 완납</td><td>신한더모아</td><td class="r num">5,997</td><td class="r num cg">997</td><td class="r num t3">-</td><td class="r t3">16.6%</td><td class="c"><span class="bd bd-g">✓</span></td></tr>
         </tbody>
       </table>
-    </div>
-  </div>
+      </div><!-- /scroll wrapper -->
+    </div><!-- /desktop-table -->
+  </div><!-- /dtbl-wrap -->
 
 </div><!-- /container -->
 
