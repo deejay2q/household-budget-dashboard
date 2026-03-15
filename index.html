@@ -1797,67 +1797,140 @@ document.getElementById('perfGrid').innerHTML=perfData.map(p=>{
 }).join('');
 
 // ═══════════════════════════════════════════════════════════
-// 상세 소비 내역 필터
+// 상세 소비 내역 필터 (데스크탑 테이블 + 모바일 카드 통합)
 // ═══════════════════════════════════════════════════════════
 (function(){
-  // 각 행에서 데이터를 파싱하여 data-* 속성 주입
+
+  /* ── 1. 데스크탑 테이블 행 data-* 파싱 ── */
   const rows = document.querySelectorAll('.dtbl tbody tr');
   rows.forEach(tr => {
     const tds = tr.querySelectorAll('td');
     if(tds.length < 12) return;
-    // C1: badge text
     const c1el = tds[3].querySelector('.bd');
-    const c1 = c1el ? c1el.textContent.trim() : '';
-    // 카드
+    const c1   = c1el ? c1el.textContent.trim() : '';
     const card = tds[6].textContent.trim();
-    // 실적
     const perfEl = tds[11].querySelector('.bd');
-    const perf = perfEl ? (perfEl.textContent.trim() === '✓' ? 'yes' : 'no') : 'no';
-    // 적립/할인
+    const perf   = perfEl ? (perfEl.textContent.trim() === '✓' ? 'yes' : 'no') : 'no';
     const saveVal = tds[8].textContent.trim().replace(/,/g,'');
     const discVal = tds[9].textContent.trim().replace(/,/g,'');
     const hasSave = saveVal !== '-' && saveVal !== '' && parseInt(saveVal) > 0;
     const hasDisc = discVal !== '-' && discVal !== '' && parseInt(discVal) > 0;
-    const benefit = hasSave ? 'save' : hasDisc ? 'disc' : 'none';
-    // 금액
-    const amtVal = parseInt(tds[7].textContent.trim().replace(/,/g,'')) || 0;
+    const benefit  = hasSave ? 'save' : hasDisc ? 'disc' : 'none';
+    const amtVal  = parseInt(tds[7].textContent.trim().replace(/,/g,'')) || 0;
     const saveNum = hasSave ? (parseInt(saveVal) || 0) : 0;
     const discNum = hasDisc ? (parseInt(discVal) || 0) : 0;
-
-    tr.dataset.c1 = c1;
-    tr.dataset.card = card;
-    tr.dataset.perf = perf;
-    tr.dataset.benefit = benefit;
-    tr.dataset.amt = amtVal;
-    tr.dataset.save = saveNum;
-    tr.dataset.disc = discNum;
+    tr.dataset.c1 = c1; tr.dataset.card = card; tr.dataset.perf = perf;
+    tr.dataset.benefit = benefit; tr.dataset.amt = amtVal;
+    tr.dataset.save = saveNum; tr.dataset.disc = discNum;
   });
 
-  // 현재 필터 상태
+  /* ── 2. 모바일 카드 data-* 파싱 ── */
+  const mcards = document.querySelectorAll('.mobile-cards .mcard');
+  mcards.forEach(card => {
+    const top = card.querySelector('.mcard-top');
+    if(!top) return;
+
+    // C1: 첫 번째 .bd (날짜·번호 다음)
+    const bdEls = top.querySelectorAll('.bd');
+    let c1 = '';
+    for(const el of bdEls){
+      const t = el.textContent.trim();
+      // mcard-result 배지(✓/✗)는 제외
+      if(t !== '✓' && t !== '✗'){ c1 = t; break; }
+    }
+
+    // 카드사: .mcard-card
+    const cardEl = card.querySelector('.mcard-card');
+    const cardName = cardEl ? cardEl.textContent.trim() : '';
+
+    // 실적: mcard-result 배지
+    const resultEl = top.querySelector('.mcard-result');
+    const perf = resultEl ? (resultEl.textContent.trim() === '✓' ? 'yes' : 'no') : 'no';
+
+    // 혜택/금액: .mcard-disc 텍스트 파싱
+    const discEl = card.querySelector('.mcard-disc');
+    const discTxt = discEl ? discEl.textContent.trim() : '';
+    let benefit = 'none', saveNum = 0, discNum = 0;
+    if(discTxt.startsWith('적립')){
+      benefit = 'save';
+      saveNum = parseInt(discTxt.replace(/[^0-9]/g,'')) || 0;
+    } else if(discTxt.startsWith('할인')){
+      benefit = 'disc';
+      discNum = parseInt(discTxt.replace(/[^0-9]/g,'')) || 0;
+    }
+
+    // 금액: .mcard-amt
+    const amtEl = card.querySelector('.mcard-amt');
+    const amtNum = amtEl ? (parseInt(amtEl.textContent.replace(/[^0-9]/g,'')) || 0) : 0;
+
+    card.dataset.c1      = c1;
+    card.dataset.card    = cardName;
+    card.dataset.perf    = perf;
+    card.dataset.benefit = benefit;
+    card.dataset.amt     = amtNum;
+    card.dataset.save    = saveNum;
+    card.dataset.disc    = discNum;
+  });
+
+  /* ── 3. 날짜 구분 헤더 요소 수집 ── */
+  // .mobile-cards 내 mcard가 아닌 직계 자식 div들(날짜 헤더)
+  const mobileDateDividers = Array.from(
+    document.querySelectorAll('.mobile-cards > div:not(.mcard)')
+  );
+
+  /* ── 4. 현재 필터 상태 ── */
   const state = { c1:'all', card:'all', perf:'all', benefit:'all' };
 
+  /* ── 5. 필터 적용 ── */
   function applyFilter(){
     let count=0, total=0, save=0, disc=0;
+
+    // 데스크탑 테이블 행 처리
     rows.forEach(tr => {
       if(tr.querySelectorAll('td').length < 12){ tr.style.display=''; return; }
       const ok =
-        (state.c1   ==='all' || tr.dataset.c1   === state.c1) &&
-        (state.card ==='all' || tr.dataset.card  === state.card) &&
-        (state.perf ==='all' || tr.dataset.perf  === state.perf) &&
-        (state.benefit==='all'|| tr.dataset.benefit===state.benefit);
+        (state.c1      ==='all' || tr.dataset.c1      === state.c1) &&
+        (state.card    ==='all' || tr.dataset.card     === state.card) &&
+        (state.perf    ==='all' || tr.dataset.perf     === state.perf) &&
+        (state.benefit ==='all' || tr.dataset.benefit  === state.benefit);
       tr.style.display = ok ? '' : 'none';
       if(ok){
         count++;
-        total += parseInt(tr.dataset.amt)||0;
-        save  += parseInt(tr.dataset.save)||0;
-        disc  += parseInt(tr.dataset.disc)||0;
+        total += parseInt(tr.dataset.amt)  || 0;
+        save  += parseInt(tr.dataset.save) || 0;
+        disc  += parseInt(tr.dataset.disc) || 0;
       }
     });
-    // 상단 필터 요약
+
+    // 모바일 카드 처리
+    mcards.forEach(card => {
+      const ok =
+        (state.c1      ==='all' || card.dataset.c1      === state.c1) &&
+        (state.card    ==='all' || card.dataset.card     === state.card) &&
+        (state.perf    ==='all' || card.dataset.perf     === state.perf) &&
+        (state.benefit ==='all' || card.dataset.benefit  === state.benefit);
+      card.style.display = ok ? '' : 'none';
+      // 집계는 모바일에서 중복이 되므로 데스크탑 행 기준을 사용(위에서 이미 집계)
+    });
+
+    // 날짜 헤더: 해당 날짜의 카드가 모두 숨겨지면 헤더도 숨김
+    mobileDateDividers.forEach(divider => {
+      // 다음 형제 mcard들을 수집 (다음 헤더 이전까지)
+      let sibling = divider.nextElementSibling;
+      let hasVisible = false;
+      while(sibling && sibling.classList.contains('mcard')){
+        if(sibling.style.display !== 'none') hasVisible = true;
+        sibling = sibling.nextElementSibling;
+      }
+      divider.style.display = hasVisible ? '' : 'none';
+    });
+
+    // 상단 필터 요약 업데이트
     document.getElementById('fCount').textContent = count;
     document.getElementById('fTotal').textContent = total.toLocaleString();
     document.getElementById('fSave').textContent  = save.toLocaleString();
     document.getElementById('fDisc').textContent  = disc.toLocaleString();
+
     // 테이블 하단 합계 행
     const benefitTotal = save + disc;
     const rate = total > 0 ? ((benefitTotal / total) * 100).toFixed(1) : '0.0';
@@ -1868,11 +1941,10 @@ document.getElementById('perfGrid').innerHTML=perfData.map(p=>{
     document.getElementById('footRate').textContent  = rate + '%';
   }
 
-  // 버튼 이벤트
+  /* ── 6. 버튼 이벤트 ── */
   document.querySelectorAll('.fbtn').forEach(btn => {
     btn.addEventListener('click', () => {
       const f = btn.dataset.filter;
-      // 같은 그룹 active 해제
       document.querySelectorAll(`.fbtn[data-filter="${f}"]`).forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       state[f] = btn.dataset.val;
@@ -1880,7 +1952,7 @@ document.getElementById('perfGrid').innerHTML=perfData.map(p=>{
     });
   });
 
-  // 초기화
+  /* ── 7. 초기화 버튼 ── */
   document.getElementById('filterReset').addEventListener('click', () => {
     Object.keys(state).forEach(k => state[k]='all');
     document.querySelectorAll('.fbtn').forEach(b => {
@@ -1889,7 +1961,7 @@ document.getElementById('perfGrid').innerHTML=perfData.map(p=>{
     applyFilter();
   });
 
-  // 초기 실행
+  /* ── 8. 초기 실행 ── */
   applyFilter();
 })();
 
